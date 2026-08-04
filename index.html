@@ -247,6 +247,17 @@ footer a{color:#E9DFF2;}
 .note{
   font-size:0.82rem; color:#9a93a8; font-style:italic; margin-top:6px;
 }
+
+.photo-frame img{width:100%; display:block; border-radius:2px; aspect-ratio:4/5; object-fit:cover; object-position:center 20%;}
+.story-gallery{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:40px;}
+.story-gallery figure{margin:0;}
+.story-gallery img{width:100%; border-radius:10px; display:block; aspect-ratio:4/5; object-fit:cover; box-shadow:0 10px 24px rgba(46,42,56,0.14);}
+.story-gallery figcaption{font-family:'Fraunces',serif; font-style:italic; font-size:0.9rem; color:#5A5566; margin-top:10px; text-align:center;}
+@media(max-width:600px){ .story-gallery{grid-template-columns:1fr;} }
+.anf-card img{width:100%; border-radius:8px; display:block; object-fit:cover; max-height:420px;}
+.connect-photo{max-width:300px; margin:0 auto 40px;}
+.connect-photo img{width:100%; border-radius:12px; display:block; box-shadow:0 14px 30px rgba(0,0,0,0.3);}
+.connect-photo figcaption{color:#F0C77B; font-family:'Fraunces',serif; font-style:italic; text-align:center; margin-top:12px; font-size:0.9rem;}
 </style>
 </head>
 <body>
@@ -258,6 +269,7 @@ footer a{color:#E9DFF2;}
       <li><a href="#story">Her Story</a></li>
       <li><a href="#auntnell">Aunt Nell's Friends</a></li>
       <li><a href="#help">Ways to Help</a></li>
+      <li><a href="#caregivers">For Caregivers</a></li>
       <li><a href="#connect">Connect</a></li>
     </ul>
   </div>
@@ -276,8 +288,8 @@ footer a{color:#E9DFF2;}
       </div>
     </div>
     <div class="photo-frame">
-      <div class="ph-inner">[ photo of Danell —<br>sunhat / deck portrait ]</div>
-      <div class="cap">— Danell, this spring</div>
+      <img src="images/stem-cells.jpg" alt="Danell smiling brightly, holding her own stem cell bag before her transplant">
+      <div class="cap">— The day of her transplant</div>
     </div>
   </div>
 </header>
@@ -320,6 +332,17 @@ footer a{color:#E9DFF2;}
       </div>
     </div>
 
+
+    <div class="story-gallery">
+      <figure>
+        <img src="images/bmt-sign.jpg" alt="Danell giving a peace sign in a frog hat next to the Blood and Marrow Transplant Unit sign">
+        <figcaption>Transplant day — August 2025</figcaption>
+      </figure>
+      <figure>
+        <img src="images/hospital-funny.jpg" alt="Danell making a silly face with an oxygen mask on in her hospital bed">
+        <figcaption>Still fully herself, even here</figcaption>
+      </figure>
+    </div>
     <div class="story-body">
       <p><strong>Remission is not the same as being cured.</strong> Danell's leukemia carries higher-risk mutations, and with AML, most relapses after transplant happen within the first two years. That's the honest math her family lives with: this isn't a victory lap, it's real, uncertain time — and they've chosen not to wait around and hope for more of it.</p>
       <p>Even on hard pain days, Danell shows up publicly and honestly — documenting her treatment on TikTok, and in doing so, connecting with a community of fellow transplant patients. Many are just beginning the road she's already walked. She tells them what's coming. What helped her. What she wishes someone had told her.</p>
@@ -349,12 +372,8 @@ footer a{color:#E9DFF2;}
     <div class="anf-card">
       <h3>Recent read-alongs</h3>
       <p>A growing library of storytime, coloring, and outdoor adventures.</p>
-      <div class="anf-thumbs">
-        <div class="anf-thumb">Dinosaurs<br>Before Dark</div>
-        <div class="anf-thumb">Magic Tree<br>House</div>
-        <div class="anf-thumb">Coloring With<br>Aunt Nell</div>
-      </div>
-      <p class="note" style="margin-top:16px;">Swap these for real video thumbnails once ready.</p>
+      <div class="ph-inner" style="aspect-ratio:4/5; border-radius:8px;">[ photo of Danell with the kids at the beach — coming soon ]</div>
+      <p class="note" style="margin-top:16px;">More moments from the channel, coming soon.</p>
     </div>
   </div>
 </section>
@@ -379,7 +398,7 @@ footer a{color:#E9DFF2;}
         <span class="help-tag">March 2027</span>
         <h3>Join her 50th birthday cruise</h3>
         <p>Family and friends are gathering for a week in the Caribbean to celebrate Danell's 50th birthday together. Reach out for details on joining or helping make it possible for others to come.</p>
-        <a href="mailto:hello@example.com">Get in touch →</a>
+        <a href="mailto:hello@nellyslegacyproject.com">Get in touch →</a>
       </div>
       <div class="help-card">
         <span class="help-tag">Ongoing</span>
@@ -391,13 +410,58 @@ footer a{color:#E9DFF2;}
         <span class="help-tag">Travel &amp; Companies</span>
         <h3>Partner with us</h3>
         <p>Danell's bucket list includes Disney, the Bahamas, and beyond. If you're with a travel brand or company that might want to be part of her story, we'd love to talk.</p>
-        <a href="mailto:hello@example.com">Start a conversation →</a>
+        <a href="mailto:hello@nellyslegacyproject.com">Start a conversation →</a>
       </div>
       <div class="help-card">
         <span class="help-tag">Simple &amp; Free</span>
         <h3>Watch, share, subscribe</h3>
         <p>The easiest way to help Aunt Nell's Friends grow is to watch an episode with a kid in your life, and share it with a friend who might need it too.</p>
         <a href="https://youtube.com/@AuntNellsFriends" target="_blank" rel="noopener">Visit the channel →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 140 20" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2 12 Q 20 2, 35 12 T 68 12 T 101 12 T 138 12" fill="none" stroke="#2E6659" stroke-width="2.5" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<!-- FOR CAREGIVERS -->
+<section id="caregivers" class="band-lav">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">For Caregivers</span>
+      <h2>What I wish someone had told me</h2>
+      <p>When Danell was admitted for her transplant stay, I kept notes on what actually helped — the practical stuff nobody mentions in the intake paperwork. If you're caring for someone going through AML or a transplant right now, I hope some of this saves you a hard day.</p>
+    </div>
+
+    <div class="story-body" style="margin-bottom:40px;">
+      <p>Your loved one just got admitted for a multi-week stay. You will feel like you're drinking from a firehose for the first two weeks. Stay calm, ask questions, write down what you forget to ask, and trust the process — everyone on that floor wants the best outcome for you, and they've done this hundreds of times even when it's your first.</p>
+    </div>
+
+    <div class="help-grid">
+      <div class="help-card">
+        <span class="help-tag">Hospital Basics</span>
+        <h3>Finding your way &amp; settling in</h3>
+        <p>Give visitors clear directions ahead of time — which structure to park in, which elevators, which floor. Meet them in the waiting lobby the first time to walk them through masking and sanitizing in/out. There's usually a shared family kitchen, a whiteboard to track laps around the floor (ask about it — it helps keep your person motivated to move), and yes, you can receive mail and packages, just expect a day or two of delay.</p>
+      </div>
+      <div class="help-card">
+        <span class="help-tag">Advocate</span>
+        <h3>Ask. Then ask again.</h3>
+        <p>Never let your person be in pain or uncomfortable without saying something — the nurse can message the doctor anytime. If the hospital food isn't cutting it, ask about alternate menu options; long-stay floors often have more flexibility than you'd guess. When people ask how they can help, let them. An Amazon wish list for supplies was one of the best things we did — people, including total strangers, showed up for it.</p>
+      </div>
+      <div class="help-card">
+        <span class="help-tag">Comfort Items</span>
+        <h3>What actually helped</h3>
+        <p>Two full-size heated blankets (rotate every 3 days — skip heated throws, their timers are too short). Pillows and pillowcases from home. A handheld travel bidet — don't go cheap here, it's a game changer when the side effects hit. Pick-line shirts with button or zip arms. Non-slip bath mats. A hanging shoe organizer for the back of the door does more for staying organized than you'd think.</p>
+      </div>
+      <div class="help-card">
+        <span class="help-tag">Talk to me</span>
+        <h3>You don't have to figure this out alone</h3>
+        <p>I remember how disorienting those first days were. If you're a caregiver navigating AML or a transplant stay and want to talk through any of it, reach out — happy to share what we learned, or just listen.</p>
+        <a href="mailto:caregiver@nellyslegacyproject.com">Send a message →</a>
       </div>
     </div>
   </div>
@@ -411,6 +475,10 @@ footer a{color:#E9DFF2;}
       <h2>Starting your own journey?</h2>
       <p>Danell mentors others going through AML and stem cell transplants. If that's you, or someone you love, she'd genuinely like to hear from you.</p>
     </div>
+    <div class="connect-photo">
+      <img src="images/chemo-funny.jpg" alt="Danell making a funny face with an oxygen mask on during treatment">
+      <figcaption>She's really been through it — and she's still laughing.</figcaption>
+    </div>
     <div class="connect-wrap">
       <div class="connect-card">
         <h3>Reach out on TikTok</h3>
@@ -420,7 +488,7 @@ footer a{color:#E9DFF2;}
       <div class="connect-card">
         <h3>Send a message</h3>
         <p>Prefer email? Reach the family directly and we'll pass it along.</p>
-        <a href="mailto:hello@example.com" style="color:#F0C77B;">hello@example.com →</a>
+        <a href="mailto:hello@nellyslegacyproject.com" style="color:#F0C77B;">hello@nellyslegacyproject.com →</a>
       </div>
     </div>
   </div>
