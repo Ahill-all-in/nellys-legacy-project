@@ -8,16 +8,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Libre+Franklin:wght@300;400;500;600;700&display=swap');
 
 :root{
-  --ink:#2E2A38;
-  --paper:#F6F2F9;
-  --paper-warm:#FBF7EE;
-  --gold:#E2A63B;
-  --gold-deep:#C8862A;
-  --teal:#2E6659;
-  --teal-deep:#1F4B41;
-  --lavender:#B8A0CC;
-  --lavender-pale:#E9E0F2;
-  --line:#DCD3E6;
+  --ink:#152530;
+  --paper:#F1EFE7;
+  --paper-warm:#F6F4EC;
+  --gold:#C9A66B;
+  --gold-deep:#A8824A;
+  --teal:#2F6B7A;
+  --teal-deep:#153447;
+  --lavender:#7FA9B0;
+  --lavender-pale:#E1E9E6;
+  --line:#D7DCD5;
   --max:1100px;
 }
 
@@ -89,7 +89,7 @@ nav .wrap{
   content:"";
   position:absolute; top:-120px; right:-120px;
   width:420px; height:420px; border-radius:50%;
-  background:radial-gradient(circle, rgba(226,166,59,0.18), transparent 70%);
+  background:radial-gradient(circle, rgba(201,166,107,0.18), transparent 70%);
   pointer-events:none;
 }
 .hero-grid{
@@ -108,7 +108,7 @@ nav .wrap{
 }
 .hero h1 em{font-style:italic; color:var(--gold-deep); font-weight:500;}
 .hero p.lede{
-  font-size:1.15rem; color:#4A4557; max-width:52ch; margin-bottom:32px;
+  font-size:1.15rem; color:#43585F; max-width:52ch; margin-bottom:32px;
 }
 .cta-row{display:flex; gap:16px; flex-wrap:wrap;}
 .btn{
@@ -118,9 +118,9 @@ nav .wrap{
 }
 .btn-primary{
   background:var(--teal-deep); color:#fff;
-  box-shadow:0 4px 14px rgba(31,75,65,0.25);
+  box-shadow:0 4px 14px rgba(21,52,71,0.25);
 }
-.btn-primary:hover{transform:translateY(-2px); text-decoration:none; box-shadow:0 8px 20px rgba(31,75,65,0.32);}
+.btn-primary:hover{transform:translateY(-2px); text-decoration:none; box-shadow:0 8px 20px rgba(21,52,71,0.32);}
 .btn-ghost{
   background:transparent; color:var(--teal-deep); border:1.5px solid var(--teal-deep);
 }
@@ -131,14 +131,14 @@ nav .wrap{
   background:#fff;
   padding:14px 14px 44px;
   border-radius:4px;
-  box-shadow:0 18px 40px rgba(46,42,56,0.16), 0 2px 8px rgba(46,42,56,0.08);
+  box-shadow:0 18px 40px rgba(21,37,48,0.16), 0 2px 8px rgba(21,37,48,0.08);
   transform:rotate(2deg);
   max-width:380px; margin:0 auto;
 }
 .photo-frame .ph-inner{
   aspect-ratio:4/5;
   background:
-    linear-gradient(135deg, var(--lavender-pale) 0%, #fff 55%, #F3E9D8 100%);
+    linear-gradient(135deg, var(--lavender-pale) 0%, #fff 55%, #E6EFEC 100%);
   border-radius:2px;
   display:flex; align-items:center; justify-content:center;
   color:var(--lavender); font-family:'Fraunces', serif; font-style:italic; font-size:0.95rem;
@@ -146,18 +146,18 @@ nav .wrap{
 }
 .photo-frame .cap{
   position:absolute; bottom:14px; left:0; right:0; text-align:center;
-  font-family:'Fraunces', serif; font-style:italic; font-size:0.9rem; color:#8a8296;
+  font-family:'Fraunces', serif; font-style:italic; font-size:0.9rem; color:#6D8890;
 }
 
 /* ---------- SECTION SHELL ---------- */
 section{padding:76px 0;}
 .section-head{max-width:640px; margin-bottom:44px;}
 .section-head h2{font-size:clamp(1.8rem, 3.4vw, 2.4rem); margin-bottom:14px;}
-.section-head p{color:#4A4557; font-size:1.05rem;}
+.section-head p{color:#43585F; font-size:1.05rem;}
 
-.band-teal{background:var(--teal-deep); color:#F3EFE3;}
+.band-teal{background:var(--teal-deep); color:#F0EDE3;}
 .band-teal h2, .band-teal h3{color:#fff;}
-.band-teal .section-head p{color:#CFE3DC;}
+.band-teal .section-head p{color:#C2DEE4;}
 .band-lav{background:var(--lavender-pale);}
 
 /* ---------- STORY / TIMELINE ---------- */
@@ -177,9 +177,9 @@ section{padding:76px 0;}
   color:var(--gold-deep); display:block; margin-bottom:10px;
 }
 .t-card h4{font-family:'Fraunces', serif; font-size:1.05rem; color:var(--teal-deep); margin-bottom:8px; font-weight:600;}
-.t-card p{font-size:0.92rem; color:#5A5566;}
+.t-card p{font-size:0.92rem; color:#4E6067;}
 
-.story-body{max-width:70ch; font-size:1.05rem; color:#3B3646;}
+.story-body{max-width:70ch; font-size:1.05rem; color:#243640;}
 .story-body p{margin-bottom:18px;}
 .story-body strong{color:var(--teal-deep);}
 
@@ -190,10 +190,10 @@ section{padding:76px 0;}
 @media(max-width:860px){ .anf-grid{grid-template-columns:1fr;} }
 .anf-card{
   background:#fff; border-radius:14px; padding:36px 32px;
-  box-shadow:0 10px 30px rgba(46,42,56,0.08);
+  box-shadow:0 10px 30px rgba(21,37,48,0.08);
 }
 .anf-card h3{font-size:1.5rem; margin-bottom:14px;}
-.anf-card p{color:#4A4557; margin-bottom:20px;}
+.anf-card p{color:#43585F; margin-bottom:20px;}
 .anf-thumbs{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
 .anf-thumb{
   aspect-ratio:16/10; border-radius:6px;
@@ -213,14 +213,14 @@ section{padding:76px 0;}
   border:1px solid var(--line);
   transition:transform 0.15s ease, box-shadow 0.15s ease;
 }
-.help-card:hover{transform:translateY(-3px); box-shadow:0 12px 28px rgba(46,42,56,0.1);}
+.help-card:hover{transform:translateY(-3px); box-shadow:0 12px 28px rgba(21,37,48,0.1);}
 .help-tag{
   display:inline-block; font-size:0.72rem; font-weight:700; letter-spacing:0.08em;
   text-transform:uppercase; color:var(--teal); background:var(--lavender-pale);
   padding:5px 12px; border-radius:100px; margin-bottom:14px;
 }
 .help-card h3{font-size:1.25rem; margin-bottom:10px;}
-.help-card p{color:#4A4557; font-size:0.96rem; margin-bottom:16px;}
+.help-card p{color:#43585F; font-size:0.96rem; margin-bottom:16px;}
 
 /* ---------- CONNECT ---------- */
 .connect-wrap{
@@ -233,31 +233,31 @@ section{padding:76px 0;}
   border-radius:14px; padding:32px 28px;
 }
 .connect-card h3{font-size:1.2rem; margin-bottom:10px;}
-.connect-card p{color:#CFE3DC; font-size:0.95rem; margin-bottom:18px;}
+.connect-card p{color:#C2DEE4; font-size:0.95rem; margin-bottom:18px;}
 
 /* ---------- FOOTER ---------- */
 footer{
-  background:var(--ink); color:#C9C2D6; padding:48px 0 32px;
+  background:var(--ink); color:#BFD1CE; padding:48px 0 32px;
   font-size:0.88rem;
 }
 footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px;}
-footer a{color:#E9DFF2;}
+footer a{color:#D8E4E0;}
 .foot-links{display:flex; gap:22px; list-style:none;}
 
 .note{
-  font-size:0.82rem; color:#9a93a8; font-style:italic; margin-top:6px;
+  font-size:0.82rem; color:#7C9298; font-style:italic; margin-top:6px;
 }
 
 .photo-frame img{width:100%; display:block; border-radius:2px; aspect-ratio:4/5; object-fit:cover; object-position:center 20%;}
 .story-gallery{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:40px;}
 .story-gallery figure{margin:0;}
-.story-gallery img{width:100%; border-radius:10px; display:block; aspect-ratio:4/5; object-fit:cover; box-shadow:0 10px 24px rgba(46,42,56,0.14);}
-.story-gallery figcaption{font-family:'Fraunces',serif; font-style:italic; font-size:0.9rem; color:#5A5566; margin-top:10px; text-align:center;}
+.story-gallery img{width:100%; border-radius:10px; display:block; aspect-ratio:4/5; object-fit:cover; box-shadow:0 10px 24px rgba(21,37,48,0.14);}
+.story-gallery figcaption{font-family:'Fraunces',serif; font-style:italic; font-size:0.9rem; color:#4E6067; margin-top:10px; text-align:center;}
 @media(max-width:600px){ .story-gallery{grid-template-columns:1fr;} }
 .anf-card img{width:100%; border-radius:8px; display:block; object-fit:cover; max-height:420px;}
 .connect-photo{max-width:300px; margin:0 auto 40px;}
 .connect-photo img{width:100%; border-radius:12px; display:block; box-shadow:0 14px 30px rgba(0,0,0,0.3);}
-.connect-photo figcaption{color:#F0C77B; font-family:'Fraunces',serif; font-style:italic; text-align:center; margin-top:12px; font-size:0.9rem;}
+.connect-photo figcaption{color:#D9B872; font-family:'Fraunces',serif; font-style:italic; text-align:center; margin-top:12px; font-size:0.9rem;}
 </style>
 </head>
 <body>
@@ -296,7 +296,7 @@ footer a{color:#E9DFF2;}
 
 <div class="divider">
   <svg viewBox="0 0 140 20" xmlns="http://www.w3.org/2000/svg">
-    <path d="M2 12 Q 20 2, 35 12 T 68 12 T 101 12 T 138 12" fill="none" stroke="#E2A63B" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M2 12 Q 20 2, 35 12 T 68 12 T 101 12 T 138 12" fill="none" stroke="#C9A66B" stroke-width="2.5" stroke-linecap="round"/>
   </svg>
 </div>
 
@@ -354,7 +354,7 @@ footer a{color:#E9DFF2;}
 
 <div class="divider">
   <svg viewBox="0 0 140 20" xmlns="http://www.w3.org/2000/svg">
-    <path d="M2 12 Q 20 2, 35 12 T 68 12 T 101 12 T 138 12" fill="none" stroke="#2E6659" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M2 12 Q 20 2, 35 12 T 68 12 T 101 12 T 138 12" fill="none" stroke="#2F6B7A" stroke-width="2.5" stroke-linecap="round"/>
   </svg>
 </div>
 
@@ -364,8 +364,8 @@ footer a{color:#E9DFF2;}
     <div>
       <span class="eyebrow">My Legacy Project</span>
       <h2 style="margin-bottom:16px;">Aunt Nell's Friends</h2>
-      <p style="color:#4A4557; font-size:1.05rem; margin-bottom:20px;">Join me as I discover our world through play and stories. I am a mom, a grandma, and an aunt to many more. They may not all be my DNA, but they are all family in my heart.</p>
-      <p style="color:#4A4557; font-size:1.05rem;">On my YouTube channel, I read picture books, color, and play outdoors with kids — building something joyful and educational I hope will keep reaching children long after I'm gone.</p>
+      <p style="color:#43585F; font-size:1.05rem; margin-bottom:20px;">Join me as I discover our world through play and stories. I am a mom, a grandma, and an aunt to many more. They may not all be my DNA, but they are all family in my heart.</p>
+      <p style="color:#43585F; font-size:1.05rem;">On my YouTube channel, I read picture books, color, and play outdoors with kids — building something joyful and educational I hope will keep reaching children long after I'm gone.</p>
       <div style="margin-top:26px;">
         <a href="https://youtube.com/@AuntNellsFriends" class="btn btn-primary" target="_blank" rel="noopener">Watch on YouTube</a>
       </div>
@@ -381,7 +381,7 @@ footer a{color:#E9DFF2;}
 
 <div class="divider">
   <svg viewBox="0 0 140 20" xmlns="http://www.w3.org/2000/svg">
-    <path d="M2 12 Q 20 2, 35 12 T 68 12 T 101 12 T 138 12" fill="none" stroke="#B8A0CC" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M2 12 Q 20 2, 35 12 T 68 12 T 101 12 T 138 12" fill="none" stroke="#7FA9B0" stroke-width="2.5" stroke-linecap="round"/>
   </svg>
 </div>
 
@@ -437,7 +437,7 @@ footer a{color:#E9DFF2;}
 
 <div class="divider">
   <svg viewBox="0 0 140 20" xmlns="http://www.w3.org/2000/svg">
-    <path d="M2 12 Q 20 2, 35 12 T 68 12 T 101 12 T 138 12" fill="none" stroke="#2E6659" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M2 12 Q 20 2, 35 12 T 68 12 T 101 12 T 138 12" fill="none" stroke="#2F6B7A" stroke-width="2.5" stroke-linecap="round"/>
   </svg>
 </div>
 
@@ -484,7 +484,7 @@ footer a{color:#E9DFF2;}
 <section id="connect" class="band-teal">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow" style="color:#F0C77B;">Not Alone</span>
+      <span class="eyebrow" style="color:#D9B872;">Not Alone</span>
       <h2>Starting your own journey?</h2>
       <p>I mentor others going through AML and stem cell transplants. If that's you, or someone you love, I'd genuinely like to hear from you.</p>
     </div>
@@ -496,17 +496,17 @@ footer a{color:#E9DFF2;}
       <div class="connect-card">
         <h3>Reach out on TikTok</h3>
         <p>I share my ongoing journey and connect with patients at every stage — from diagnosis to years out.</p>
-        <a href="https://www.tiktok.com/@nellyhill77" target="_blank" rel="noopener" style="color:#F0C77B;">@nellyhill77 →</a>
+        <a href="https://www.tiktok.com/@nellyhill77" target="_blank" rel="noopener" style="color:#D9B872;">@nellyhill77 →</a>
       </div>
       <div class="connect-card">
         <h3>Follow along on Facebook</h3>
         <p>I've shared even more of my story there — day-to-day updates, the harder days included.</p>
-        <a href="https://www.facebook.com/nellyhill" target="_blank" rel="noopener" style="color:#F0C77B;">facebook.com/nellyhill →</a>
+        <a href="https://www.facebook.com/nellyhill" target="_blank" rel="noopener" style="color:#D9B872;">facebook.com/nellyhill →</a>
       </div>
       <div class="connect-card">
         <h3>Send a message</h3>
         <p>Prefer email? Reach the family directly and we'll pass it along.</p>
-        <a href="mailto:hello@nellyslegacyproject.com" style="color:#F0C77B;">hello@nellyslegacyproject.com →</a>
+        <a href="mailto:hello@nellyslegacyproject.com" style="color:#D9B872;">hello@nellyslegacyproject.com →</a>
       </div>
     </div>
   </div>
