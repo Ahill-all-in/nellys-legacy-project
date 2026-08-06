@@ -90,6 +90,7 @@ nav{
 nav .wrap{
   display:flex; align-items:center; justify-content:space-between;
   height:72px;
+  position:relative;
 }
 .brand{
   font-family:'Fraunces', serif;
@@ -98,13 +99,32 @@ nav .wrap{
   color:var(--teal-deep);
 }
 .brand span{color:var(--gold-deep);}
-.navlinks{display:flex; gap:28px; list-style:none;}
+.navlinks{display:flex; gap:22px; list-style:none;}
 .navlinks a{
-  color:var(--ink); font-size:0.92rem; font-weight:500;
+  color:var(--ink); font-size:0.9rem; font-weight:500;
   text-decoration:none; letter-spacing:0.01em;
 }
 .navlinks a:hover{color:var(--gold-deep);}
-@media(max-width:680px){ .navlinks{display:none;} }
+.nav-toggle{
+  display:none; background:none; border:none; cursor:pointer;
+  padding:8px; margin:-8px;
+}
+.nav-toggle span{
+  display:block; width:22px; height:2px; background:var(--ink);
+  margin:5px 0; transition:transform 0.2s ease, opacity 0.2s ease;
+}
+@media(max-width:760px){
+  .navlinks{
+    display:none; position:absolute; top:100%; left:0; right:0;
+    flex-direction:column; gap:0; background:var(--paper-warm);
+    border-bottom:1px solid var(--line); padding:8px 0;
+    box-shadow:0 10px 20px rgba(21,37,48,0.08);
+  }
+  .navlinks.open{display:flex;}
+  .navlinks a{display:block; padding:14px 28px; border-bottom:1px solid var(--line);}
+  .navlinks li:last-child a{border-bottom:none;}
+  .nav-toggle{display:block;}
+}
 
 /* ---------- DIVIDER (signature element) ---------- */
 .divider{
@@ -396,18 +416,37 @@ footer a{color:#D8E4E0;}
 <nav>
   <div class="wrap">
     <div class="brand">Danell<span>'s</span> Journey</div>
-    <ul class="navlinks">
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="navlinks" id="nav-links">
       <li><a href="#story">My Story</a></li>
       <li><a href="#hope">Hope</a></li>
       <li><a href="#auntnell">Aunt Nell's Friends</a></li>
-      <li><a href="#registry">Join the Registry</a></li>
+      <li><a href="#registry">Registry</a></li>
       <li><a href="#help">Ways to Help</a></li>
-      <li><a href="#caregivers">For Caregivers</a></li>
-      <li><a href="#story-wall">Share Your Story</a></li>
       <li><a href="#connect">Connect</a></li>
     </ul>
   </div>
 </nav>
+
+<script>
+(function(){
+  var btn = document.getElementById('nav-toggle');
+  var links = document.getElementById('nav-links');
+  if (!btn || !links) return;
+  btn.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      links.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+</script>
 
 <!-- HERO -->
 <header class="hero">
