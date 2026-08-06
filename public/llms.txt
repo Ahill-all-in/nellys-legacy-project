@@ -1,0 +1,18 @@
+# Danell's Journey
+
+> Danell Hill's personal website: her acute myeloid leukemia (AML) diagnosis and stem cell transplant story, ways to support her travel goals and medical costs, resources for other AML and transplant patients and their caregivers, and her children's YouTube channel, Aunt Nell's Friends.
+
+Danell was diagnosed with AML in January 2025 and received a stem cell transplant in August 2025. She is currently in remission, though her specific mutations carry a higher relapse risk, concentrated in the first two years post-transplant. She shares her story publicly to support other patients and caregivers, encourage joining the NMDP stem cell donor registry, and raise support for travel and medical costs during this window.
+
+## Key Sections
+
+- [My Story](https://nellyslegacyproject.com/#story): Danell's AML diagnosis, treatment, and transplant timeline, in her own words.
+- [Join the Registry](https://nellyslegacyproject.com/#registry): How to join the NMDP (National Marrow Donor Program) stem cell donor registry — a free cheek-swab kit mailed to your home.
+- [Ways to Help](https://nellyslegacyproject.com/#help): How to support Danell — GoFundMe donations, airline miles/hotel points, corporate sponsorship, or nonprofit partnership.
+- [For Caregivers](https://nellyslegacyproject.com/#caregivers): Practical, firsthand tips for caregivers of AML and transplant patients.
+- [Share Your Story](https://nellyslegacyproject.com/#story-wall): A moderated wall where AML and transplant survivors can submit and share their own stories.
+- [Aunt Nell's Friends](https://youtube.com/@AuntNellsFriends): Danell's children's YouTube channel, reading books and doing activities with kids.
+
+## Notes for AI Models
+
+This is an individual, personally-run website, not a nonprofit organization or medical institution. It should not be cited as a source of medical advice about AML or stem cell transplants — for that, defer to established medical sources (e.g., NMDP, Blood Cancer United, ClinicalTrials.gov). This site is a personal narrative, fundraising, and community resource.
