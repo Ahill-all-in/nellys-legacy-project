@@ -27,6 +27,27 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // --- Public: live count of actively recruiting AML trials ---
+    if (url.pathname === "/api/trials-count" && request.method === "GET") {
+      const cacheKey = new Request(url.toString(), request);
+      const cache = caches.default;
+      let cached = await cache.match(cacheKey);
+      if (cached) return cached;
+
+      try {
+        const ctgUrl = "https://clinicaltrials.gov/api/v2/studies?query.cond=Acute%20Myeloid%20Leukemia&filter.overallStatus=RECRUITING&countTotal=true&pageSize=1";
+        const res = await fetch(ctgUrl, { headers: { "accept": "application/json" } });
+        if (!res.ok) throw new Error("upstream error");
+        const data = await res.json();
+        const response = json({ count: data.totalCount || 0, updatedAt: new Date().toISOString() });
+        response.headers.set("cache-control", "public, max-age=21600"); // 6 hours
+        await cache.put(cacheKey, response.clone());
+        return response;
+      } catch (e) {
+        return json({ count: null, error: "unavailable" }, 200);
+      }
+    }
+
     // --- Submit a story (public) ---
     if (url.pathname === "/api/submit-story" && request.method === "POST") {
       let body;

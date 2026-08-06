@@ -371,6 +371,19 @@ footer a{color:#D8E4E0;}
 }
 .story-meta{font-family:'Fraunces',serif; font-weight:600; color:var(--teal-deep); margin-bottom:10px; font-size:0.95rem;}
 .story-text{color:#43585F; font-size:0.94rem; white-space:pre-wrap;}
+
+/* ---------- TRIALS BANNER ---------- */
+.trials-banner{
+  display:flex; align-items:center; gap:24px; background:#fff;
+  border:1.5px solid var(--gold); border-radius:14px; padding:22px 28px;
+  margin-bottom:40px; box-shadow:0 8px 22px rgba(21,37,48,0.06);
+}
+@media(max-width:600px){ .trials-banner{flex-direction:column; align-items:flex-start; gap:12px;} }
+.trials-count{
+  font-family:'Fraunces',serif; font-weight:700; font-size:2.6rem;
+  color:var(--gold-deep); flex-shrink:0; min-width:70px;
+}
+.trials-text p{color:#43585F; font-size:0.95rem; margin-bottom:4px;}
 </style>
 </head>
 <body>
@@ -665,6 +678,15 @@ footer a{color:#D8E4E0;}
       <h2>A few things that helped me</h2>
       <p>If you or someone you love was just diagnosed, here's what I share first — the things that actually made this easier to understand and carry.</p>
     </div>
+
+    <div class="trials-banner" id="trials-banner">
+      <div class="trials-count" id="trials-count">···</div>
+      <div class="trials-text">
+        <p>AML clinical trials actively recruiting patients right now — updated automatically.</p>
+        <a href="https://clinicaltrials.gov/search?cond=Acute%20Myeloid%20Leukemia&aggFilters=status:rec" target="_blank" rel="noopener">See the current trials on ClinicalTrials.gov →</a>
+      </div>
+    </div>
+
     <div class="help-grid">
       <div class="help-card">
         <span class="help-tag">Watch This First</span>
@@ -764,6 +786,16 @@ footer a{color:#D8E4E0;}
   });
 
   loadStories();
+})();
+
+(function(){
+  var el = document.getElementById('trials-count');
+  if (!el) return;
+  fetch('/api/trials-count').then(function(r){ return r.json(); }).then(function(data){
+    el.textContent = (data.count !== null && data.count !== undefined) ? data.count : '—';
+  }).catch(function(){
+    el.textContent = '—';
+  });
 })();
 </script>
 
