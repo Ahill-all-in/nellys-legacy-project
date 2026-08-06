@@ -393,6 +393,7 @@ footer a{color:#D8E4E0;}
     <div class="brand">Danell<span>'s</span> Journey</div>
     <ul class="navlinks">
       <li><a href="#story">My Story</a></li>
+      <li><a href="#hope">Hope</a></li>
       <li><a href="#auntnell">Aunt Nell's Friends</a></li>
       <li><a href="#registry">Join the Registry</a></li>
       <li><a href="#help">Ways to Help</a></li>
@@ -520,6 +521,58 @@ footer a{color:#D8E4E0;}
       <p><strong>Remission is not the same as being cured.</strong> My leukemia carries higher-risk mutations, and with AML, most relapses after transplant happen within the first two years. That's the honest math my family and I live with: this isn't a victory lap, it's real, uncertain time — and we've chosen not to wait around and hope for more of it.</p>
       <p>Even on hard pain days, I show up publicly and honestly — documenting my treatment on TikTok, and in doing so, connecting with a community of fellow transplant patients. Many are just beginning the road I've already walked. I tell them what's coming. What helped me. What I wish someone had told me.</p>
       <p>So my family and I are front-loading everything we can, now. If the remission lasts longer than expected, no one will regret having lived fully in the meantime — and we'll be the first to stop asking for help. But most of what we do together right now is likely the only time, or the last time, I get to live it. That's why the timing on the things below actually matters.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 140 20" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2 12 Q 20 2, 35 12 T 68 12 T 101 12 T 138 12" fill="none" stroke="#C9A66B" stroke-width="2.5" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<!-- HOPE -->
+<section id="hope" class="band-lav">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Hope</span>
+      <h2>The uncertain math cuts both ways</h2>
+      <p>Higher risk isn't a guarantee. People survive this — years past the point I'm at now, living full lives. Here's some of the real proof, and where treatment stands right now.</p>
+    </div>
+
+    <div class="trials-banner">
+      <div class="trials-count" id="hope-trials-count">···</div>
+      <div class="trials-text">
+        <p>AML clinical trials actively recruiting patients right now — updated automatically.</p>
+        <a href="https://clinicaltrials.gov/search?cond=Acute%20Myeloid%20Leukemia&aggFilters=status:rec" target="_blank" rel="noopener">See the current trials on ClinicalTrials.gov →</a>
+      </div>
+    </div>
+
+    <div class="help-grid">
+      <div class="help-card">
+        <span class="help-tag">30 Years Out</span>
+        <h3>"Now, 30 years later, I'm still around"</h3>
+        <p>A real AML survivor's own account of his transplant, decades of life since, and watching his kids grow up. Read it when you need proof this can be a long game.</p>
+        <a href="https://powerfulpatients.org/2023/03/14/30-year-aml-survivor-shares-his-journey/" target="_blank" rel="noopener">Read his story →</a>
+      </div>
+      <div class="help-card">
+        <span class="help-tag">Real Stories</span>
+        <h3>The Patient Story: AML survivors</h3>
+        <p>A growing collection of real AML patients — diagnosis, treatment, transplant, and life after — told in their own words.</p>
+        <a href="https://thepatientstory.com/patient-stories/leukemia/acute-myeloid-leukemia-aml/" target="_blank" rel="noopener">Browse the stories →</a>
+      </div>
+      <div class="help-card">
+        <span class="help-tag">Real Stories</span>
+        <h3>NBMT Link: transplant stories</h3>
+        <p>Bone marrow and stem cell transplant survivor stories, including patients many years out and now supporting others coming up behind them.</p>
+        <a href="https://www.nbmtlink.org/nbmtlink-blog/" target="_blank" rel="noopener">Browse the stories →</a>
+      </div>
+      <div class="help-card">
+        <span class="help-tag">Right Here</span>
+        <h3>Stories from this community</h3>
+        <p>Survivors are sharing their own stories right on this site — read them, or add yours.</p>
+        <a href="#story-wall">See the Story Wall →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -679,14 +732,6 @@ footer a{color:#D8E4E0;}
       <p>If you or someone you love was just diagnosed, here's what I share first — the things that actually made this easier to understand and carry.</p>
     </div>
 
-    <div class="trials-banner" id="trials-banner">
-      <div class="trials-count" id="trials-count">···</div>
-      <div class="trials-text">
-        <p>AML clinical trials actively recruiting patients right now — updated automatically.</p>
-        <a href="https://clinicaltrials.gov/search?cond=Acute%20Myeloid%20Leukemia&aggFilters=status:rec" target="_blank" rel="noopener">See the current trials on ClinicalTrials.gov →</a>
-      </div>
-    </div>
-
     <div class="help-grid">
       <div class="help-card">
         <span class="help-tag">Watch This First</span>
@@ -789,12 +834,13 @@ footer a{color:#D8E4E0;}
 })();
 
 (function(){
-  var el = document.getElementById('trials-count');
-  if (!el) return;
+  var els = document.querySelectorAll('.trials-count');
+  if (!els.length) return;
   fetch('/api/trials-count').then(function(r){ return r.json(); }).then(function(data){
-    el.textContent = (data.count !== null && data.count !== undefined) ? data.count : '—';
+    var text = (data.count !== null && data.count !== undefined) ? data.count : '—';
+    els.forEach(function(el){ el.textContent = text; });
   }).catch(function(){
-    el.textContent = '—';
+    els.forEach(function(el){ el.textContent = '—'; });
   });
 })();
 </script>
