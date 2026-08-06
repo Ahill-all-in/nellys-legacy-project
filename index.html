@@ -258,6 +258,37 @@ footer a{color:#D8E4E0;}
 .connect-photo{max-width:300px; margin:0 auto 40px;}
 .connect-photo img{width:100%; border-radius:12px; display:block; box-shadow:0 14px 30px rgba(0,0,0,0.3);}
 .connect-photo figcaption{color:#D9B872; font-family:'Fraunces',serif; font-style:italic; text-align:center; margin-top:12px; font-size:0.9rem;}
+
+/* ---------- FORK ---------- */
+.fork{padding:0 0 76px;}
+.fork-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+@media(max-width:760px){ .fork-grid{grid-template-columns:1fr;} }
+.fork-card{
+  display:block; border-radius:16px; padding:36px 32px;
+  text-decoration:none; transition:transform 0.15s ease, box-shadow 0.15s ease;
+}
+.fork-card:hover{transform:translateY(-3px); text-decoration:none;}
+.fork-give{
+  background:var(--teal-deep); color:#fff;
+  box-shadow:0 14px 34px rgba(21,52,71,0.28);
+}
+.fork-give h3{color:#fff;}
+.fork-give p{color:#C2DEE4; font-size:0.98rem; margin:10px 0 18px;}
+.fork-connect{
+  background:#fff; border:1.5px solid var(--line);
+  box-shadow:0 10px 26px rgba(21,37,48,0.08);
+}
+.fork-connect h3{color:var(--teal-deep);}
+.fork-connect p{color:#43585F; font-size:0.98rem; margin:10px 0 18px;}
+.fork-eyebrow{
+  font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:700;
+  color:var(--gold); display:block; margin-bottom:12px;
+}
+.fork-connect .fork-eyebrow{color:var(--gold-deep);}
+.fork-card h3{font-family:'Fraunces',serif; font-size:1.4rem; font-weight:600;}
+.fork-arrow{font-weight:600; font-size:0.92rem;}
+.fork-give .fork-arrow{color:#D9B872;}
+.fork-connect .fork-arrow{color:var(--gold-deep);}
 </style>
 </head>
 <body>
@@ -293,6 +324,24 @@ footer a{color:#D8E4E0;}
     </div>
   </div>
 </header>
+
+<!-- FORK: TWO PATHS -->
+<section class="fork">
+  <div class="wrap fork-grid">
+    <a href="#help" class="fork-card fork-give">
+      <span class="fork-eyebrow">Want to help?</span>
+      <h3>Give a trip, points, or a dollar</h3>
+      <p>Miles, hotel points, a place to stay, or a donation — see the ways in.</p>
+      <span class="fork-arrow">See how to help →</span>
+    </a>
+    <a href="#connect" class="fork-card fork-connect">
+      <span class="fork-eyebrow">On your own journey?</span>
+      <h3>Talk to someone who's been there</h3>
+      <p>Going through AML or a transplant, yourself or someone you love? I'd like to hear from you.</p>
+      <span class="fork-arrow">Connect with me →</span>
+    </a>
+  </div>
+</section>
 
 <div class="divider">
   <svg viewBox="0 0 140 20" xmlns="http://www.w3.org/2000/svg">
@@ -389,12 +438,24 @@ footer a{color:#D8E4E0;}
 <section id="help">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Ways to Help</span>
-      <h2>A few concrete ways in</h2>
-      <p>I have a short list of places I've dreamed of seeing — and a window that isn't open indefinitely. These aren't "someday" trips. Here's where things stand, and how you can be part of making them happen now.</p>
+      <span class="eyebrow">The Ask</span>
+      <h2>What I'm hoping for</h2>
+      <p>In the next 12 to 18 months, I want to see beaches and a few new places while this window is open. I'm not picky about how that happens. Miles, hotel points, a timeshare week, a place to stay, connections, or dollars — if you have something to offer, I'll gladly take it. Here's where things stand right now, and a few concrete ways in.</p>
     </div>
 
     <div class="help-grid">
+      <div class="help-card">
+        <span class="help-tag">Fastest Way to Help</span>
+        <h3>Give directly</h3>
+        <p>Every dollar goes straight toward flights, hotels, and the everyday cost of actually getting me somewhere new.</p>
+        <a href="#">Give via GoFundMe →</a>
+      </div>
+      <div class="help-card">
+        <span class="help-tag">Anything Helps</span>
+        <h3>Miles, points &amp; a place to stay</h3>
+        <p>Airline miles, hotel points, a timeshare week, a beach house sitting empty for a weekend — that's exactly the kind of help that gets me somewhere new.</p>
+        <a href="mailto:hello@nellyslegacyproject.com">Get in touch →</a>
+      </div>
       <div class="help-card">
         <span class="help-tag">March 2027</span>
         <h3>Join my 50th birthday cruise</h3>
@@ -402,15 +463,9 @@ footer a{color:#D8E4E0;}
         <a href="mailto:hello@nellyslegacyproject.com">Get in touch →</a>
       </div>
       <div class="help-card">
-        <span class="help-tag">Ongoing</span>
-        <h3>Support the fund</h3>
-        <p>Medical bills, prescriptions, and home modifications add up fast. Every contribution helps, and is genuinely appreciated.</p>
-        <a href="#">Give via GoFundMe →</a>
-      </div>
-      <div class="help-card">
-        <span class="help-tag">Travel &amp; Companies</span>
-        <h3>Partner with us</h3>
-        <p>My bucket list includes Disney, the Bahamas, and beyond. If you're with a travel brand or company that might want to be part of my story, we'd love to talk.</p>
+        <span class="help-tag">For Companies</span>
+        <h3>Sponsor part of the journey</h3>
+        <p>If your company wants to make a financial contribution toward getting me to see these places, I'd genuinely love to talk about what that could look like.</p>
         <a href="mailto:hello@nellyslegacyproject.com">Start a conversation →</a>
       </div>
       <div class="help-card">
