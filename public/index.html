@@ -318,6 +318,25 @@ footer a{color:#D8E4E0;}
   box-shadow:0 8px 22px rgba(0,0,0,0.25);
 }
 .registry .btn-registry:hover{text-decoration:none; transform:translateY(-2px);}
+
+/* ---------- STORY FORM & WALL ---------- */
+.story-form{
+  max-width:640px; background:#fff; border-radius:14px; padding:28px;
+  box-shadow:0 10px 30px rgba(21,37,48,0.08); margin-bottom:44px;
+}
+.story-form input, .story-form textarea{
+  width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:8px;
+  font-family:'Libre Franklin', sans-serif; font-size:0.95rem; margin-bottom:14px;
+  color:var(--ink); background:#fff;
+}
+.story-form textarea{resize:vertical;}
+.story-wall-list{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+@media(max-width:760px){ .story-wall-list{grid-template-columns:1fr;} }
+.story-card{
+  background:#fff; border-radius:12px; padding:24px; border:1px solid var(--line);
+}
+.story-meta{font-family:'Fraunces',serif; font-weight:600; color:var(--teal-deep); margin-bottom:10px; font-size:0.95rem;}
+.story-text{color:#43585F; font-size:0.94rem; white-space:pre-wrap;}
 </style>
 </head>
 <body>
@@ -331,6 +350,7 @@ footer a{color:#D8E4E0;}
       <li><a href="#registry">Join the Registry</a></li>
       <li><a href="#help">Ways to Help</a></li>
       <li><a href="#caregivers">For Caregivers</a></li>
+      <li><a href="#story-wall">Share Your Story</a></li>
       <li><a href="#connect">Connect</a></li>
     </ul>
   </div>
@@ -596,6 +616,122 @@ footer a{color:#D8E4E0;}
     </div>
   </div>
 </section>
+
+<div class="divider">
+  <svg viewBox="0 0 140 20" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2 12 Q 20 2, 35 12 T 68 12 T 101 12 T 138 12" fill="none" stroke="#7FA9B0" stroke-width="2.5" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<!-- NEW TO THIS -->
+<section id="start-here">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">New to This?</span>
+      <h2>A few things that helped me</h2>
+      <p>If you or someone you love was just diagnosed, here's what I share first — the things that actually made this easier to understand and carry.</p>
+    </div>
+    <div class="help-grid">
+      <div class="help-card">
+        <span class="help-tag">Watch This First</span>
+        <h3>Cells at Work</h3>
+        <p>This might sound strange, but this anime (on Netflix) explains how blood actually works — red cells, white cells, platelets — in a way that made all my doctors' explanations click. Genuinely helpful for understanding your own body.</p>
+        <a href="https://www.netflix.com/title/81028791" target="_blank" rel="noopener">Watch on Netflix →</a>
+      </div>
+      <div class="help-card">
+        <span class="help-tag">The Talk That Says It All</span>
+        <h3>Breakthroughs &amp; Progress in AML</h3>
+        <p>This webcast from Blood Cancer United covers where AML treatment stands right now. I share this with every newly diagnosed patient and family I talk to.</p>
+        <a href="https://bloodcancerunited.org/resources/educational-resources/webcast/breakthroughs-and-progress-acute-myeloid-leukemia-aml" target="_blank" rel="noopener">Watch the webcast →</a>
+      </div>
+      <div class="help-card">
+        <span class="help-tag">Where the Community Is</span>
+        <h3>AML support groups</h3>
+        <p>These forums hold real grief alongside real answers — go in knowing that. But they're also where you'll find people who understand exactly what you're carrying, at every stage.</p>
+        <a href="https://www.facebook.com/groups/783809048323389" target="_blank" rel="noopener">AML Support Group (Facebook) →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 140 20" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2 12 Q 20 2, 35 12 T 68 12 T 101 12 T 138 12" fill="none" stroke="#C9A66B" stroke-width="2.5" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<!-- STORY WALL -->
+<section id="story-wall" class="band-lav">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Sign the Wall</span>
+      <h2>Share your story</h2>
+      <p>If you're an AML or transplant survivor — one year out, ten years out, however far — I'd love for you to leave your story here. Every submission is read by me personally before it goes up, so take your time.</p>
+    </div>
+
+    <form id="story-form" class="story-form">
+      <input type="text" id="story-name" placeholder="Your name (or leave blank for Anonymous)" maxlength="80">
+      <input type="text" id="story-years" placeholder="How far out are you? (e.g. '3 years post-transplant')" maxlength="40">
+      <textarea id="story-text" placeholder="Your story..." maxlength="4000" rows="6" required></textarea>
+      <button type="submit" class="btn btn-primary" id="story-submit">Submit your story</button>
+      <p id="story-status" class="note" style="margin-top:10px;"></p>
+    </form>
+
+    <div id="story-wall-list" class="story-wall-list"></div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var form = document.getElementById('story-form');
+  var status = document.getElementById('story-status');
+  var list = document.getElementById('story-wall-list');
+
+  function loadStories(){
+    fetch('/api/stories').then(function(r){ return r.json(); }).then(function(data){
+      list.innerHTML = '';
+      (data.stories || []).forEach(function(s){
+        var card = document.createElement('div');
+        card.className = 'story-card';
+        var meta = s.yearsOut ? (escapeHtml(s.name) + ' — ' + escapeHtml(s.yearsOut)) : escapeHtml(s.name);
+        card.innerHTML = '<p class="story-meta">' + meta + '</p><p class="story-text"></p>';
+        card.querySelector('.story-text').textContent = s.story;
+        list.appendChild(card);
+      });
+    }).catch(function(){});
+  }
+  function escapeHtml(s){
+    var d = document.createElement('div');
+    d.textContent = s || '';
+    return d.innerHTML;
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    status.textContent = 'Submitting...';
+    fetch('/api/submit-story', {
+      method: 'POST',
+      headers: {'content-type':'application/json'},
+      body: JSON.stringify({
+        name: document.getElementById('story-name').value,
+        yearsOut: document.getElementById('story-years').value,
+        story: document.getElementById('story-text').value
+      })
+    }).then(function(r){ return r.json(); }).then(function(data){
+      if (data.ok) {
+        status.textContent = "Thank you — I'll read this personally, and it'll go up once approved.";
+        form.reset();
+      } else {
+        status.textContent = data.error || 'Something went wrong. Please try again.';
+      }
+    }).catch(function(){
+      status.textContent = 'Something went wrong. Please try again.';
+    });
+  });
+
+  loadStories();
+})();
+</script>
 
 <!-- CONNECT -->
 <section id="connect" class="band-teal">
