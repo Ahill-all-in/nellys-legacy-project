@@ -167,6 +167,81 @@ async function sendTelegram(env, text) {
 // ---- lifetime + rolling totals -----------------------------------------
 // Rolled forward once a day by the cron, so there is exactly one writer and
 // no race. Individual hit records still expire after 8 days; these do not.
+// ---- Aunt Nell quote collection over Telegram ---------------------------
+const QUOTE_PROMPTS = [
+  "What does Aunt Nell do that no other grown-up does?",
+  "What is the funniest thing Aunt Nell has ever done?",
+  "If you were telling a friend about Aunt Nell, what would you say?",
+  "What is your favourite thing she reads or makes up?",
+  "What do you feel like when Aunt Nell is around?"
+];
+
+async function tg(env, method, payload) {
+  if (!env.TELEGRAM_BOT_TOKEN) return null;
+  const r = await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/${method}`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  return r.json().catch(() => null);
+}
+
+async function listQuotes(env, state) {
+  const raw = await env.STORIES.get(`quotes-${state}`);
+  return raw ? JSON.parse(raw) : [];
+}
+
+async function saveQuote(env, entry) {
+  const p = await listQuotes(env, "pending");
+  p.push(entry);
+  await env.STORIES.put("quotes-pending", JSON.stringify(p));
+}
+
+async function handleTelegramUpdate(env, update) {
+  const m = update.message;
+  if (!m) return;
+  const chatId = m.chat.id;
+  const from = [m.from && m.from.first_name, m.from && m.from.last_name].filter(Boolean).join(" ") || "someone";
+  const text = (m.text || m.caption || "").trim();
+
+  if (/^\/start/.test(text)) {
+    await tg(env, "sendMessage", { chat_id: chatId, parse_mode: "HTML", text:
+      "<b>Aunt Nell's Friends</b>\n\nThis bot collects little quotes from kids about Aunt Nell, " +
+      "to put on her site so other families know she is worth a watch.\n\n" +
+      "Send <b>/quote</b> and I will give you a question to ask your kid. Then just type " +
+      "what they say and send it, with their first name at the end if you like.\n\n" +
+      "Nothing goes public until Austin approves it." });
+    return;
+  }
+  if (/^\/quote/.test(text)) {
+    const q = QUOTE_PROMPTS[Math.floor(Date.now() / 60000) % QUOTE_PROMPTS.length];
+    await tg(env, "sendMessage", { chat_id: chatId, parse_mode: "HTML", text:
+      `Ask them this, then send me their answer word for word:\n\n<b>${q}</b>\n\n` +
+      "<i>Their exact words are better than a tidy version. Wonky grammar is the point.</i>" });
+    return;
+  }
+  if (m.voice || m.audio) {
+    await tg(env, "sendMessage", { chat_id: chatId, text:
+      "Got the voice note — Austin will hear it in Telegram. If you can also type roughly what they said, send that and I will save it as a quote." });
+    return;
+  }
+  if (text.length < 3) return;
+
+  await saveQuote(env, {
+    id: Date.now() + "-" + Math.random().toString(36).slice(2, 8),
+    text: text.slice(0, 600),
+    from: from.slice(0, 60),
+    chatId,
+    at: new Date().toISOString()
+  });
+  await tg(env, "sendMessage", { chat_id: chatId, text:
+    "Saved, thank you. Austin will look at it before anything goes on the site." });
+  if (env.TELEGRAM_CHAT_ID && String(chatId) !== String(env.TELEGRAM_CHAT_ID)) {
+    await tg(env, "sendMessage", { chat_id: env.TELEGRAM_CHAT_ID, parse_mode: "HTML",
+      text: `<b>New Aunt Nell quote</b> from ${from}\n\n“${text.slice(0, 400)}”\n\nApprove at /admin/quotes` });
+  }
+}
+
 const TOTALS_KEY = "totals:all";
 
 async function getTotals(env) {
@@ -328,6 +403,62 @@ export default {
       } catch (e) {
         return json({ count: null, error: "unavailable" }, 200);
       }
+    }
+
+    // --- Telegram webhook ---
+    if (url.pathname === "/api/tg" && request.method === "POST") {
+      const secret = request.headers.get("x-telegram-bot-api-secret-token");
+      if (!env.TG_WEBHOOK_SECRET || secret !== env.TG_WEBHOOK_SECRET) {
+        return new Response("no", { status: 401 });
+      }
+      let update; try { update = await request.json(); } catch { return json({ ok: true }); }
+      ctx.waitUntil(handleTelegramUpdate(env, update));
+      return json({ ok: true });
+    }
+
+    // --- Admin: approve Aunt Nell quotes ---
+    if (url.pathname === "/admin/quotes") {
+      const key = url.searchParams.get("key");
+      if (!env.ADMIN_KEY || key !== env.ADMIN_KEY) return new Response("Not authorized.", { status: 401 });
+      if (request.method === "POST") {
+        const form = await request.formData();
+        const id = form.get("id"), action = form.get("action");
+        const pending = await listQuotes(env, "pending");
+        const idx = pending.findIndex(q => q.id === id);
+        if (idx !== -1) {
+          const [q] = pending.splice(idx, 1);
+          await env.STORIES.put("quotes-pending", JSON.stringify(pending));
+          if (action === "approve") {
+            const ok = await listQuotes(env, "approved");
+            ok.push(q);
+            await env.STORIES.put("quotes-approved", JSON.stringify(ok));
+          }
+        }
+        return Response.redirect(url.origin + "/admin/quotes?key=" + encodeURIComponent(key), 303);
+      }
+      const pending = await listQuotes(env, "pending");
+      const approved = await listQuotes(env, "approved");
+      const rows = pending.length ? pending.map(q => `
+        <div style="border:1px solid #ccc;border-radius:10px;padding:16px;margin-bottom:14px;">
+          <strong>${escapeHtml(q.from)}</strong> <span style="color:#888;">${escapeHtml(q.at.slice(0,10))}</span>
+          <p style="white-space:pre-wrap;font-size:1.1rem;">“${escapeHtml(q.text)}”</p>
+          <form method="POST" style="display:inline;">
+            <input type="hidden" name="id" value="${escapeHtml(q.id)}">
+            <button name="action" value="approve" style="background:#2F6B7A;color:#fff;border:0;padding:8px 16px;border-radius:6px;margin-right:8px;">Approve</button>
+            <button name="action" value="reject" style="background:#999;color:#fff;border:0;padding:8px 16px;border-radius:6px;">Reject</button>
+          </form>
+        </div>`).join("") : "<p>Nothing waiting.</p>";
+      return new Response(`<html><head><title>Aunt Nell Quotes</title>
+        <style>body{font-family:sans-serif;max-width:700px;margin:40px auto;padding:0 20px;}</style></head><body>
+        <h1>Pending quotes (${pending.length})</h1>${rows}
+        <h2>Approved (${approved.length})</h2>
+        ${approved.map(q => `<p>“${escapeHtml(q.text)}” <em>— ${escapeHtml(q.from)}</em></p>`).join("") || "<p>None yet.</p>"}
+        </body></html>`, { headers: { "content-type": "text/html" } });
+    }
+
+    // --- Public: approved quotes ---
+    if (url.pathname === "/api/quotes" && request.method === "GET") {
+      return json({ quotes: (await listQuotes(env, "approved")).map(q => ({ text: q.text, from: q.from })) });
     }
 
     // --- Outbound click beacon (public, fire-and-forget) ---
