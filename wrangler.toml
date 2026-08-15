@@ -5,7 +5,14 @@ main = "worker.js"
 [assets]
 directory = "./public"
 binding = "ASSETS"
+# run the Worker before serving these HTML routes so page views get logged;
+# every other asset (images, video, css) still comes straight off the edge
+run_worker_first = ["/", "/newly-diagnosed-aml", "/aml-caregiver-guide", "/index.html", "/newly-diagnosed-aml.html", "/aml-caregiver-guide.html", "/llms.txt", "/sitemap.xml"]
 
 [[kv_namespaces]]
 binding = "STORIES"
 id = "7094dced89ea4fdea0665890d610409a"
+
+[triggers]
+# 13:00 UTC = 9am Eastern (8am during standard time)
+crons = ["0 13 * * *"]

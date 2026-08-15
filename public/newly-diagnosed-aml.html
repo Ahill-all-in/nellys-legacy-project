@@ -598,6 +598,7 @@ footer a{color:#D8E4E0;}
     <div>© Danell's Journey — made with love, one story at a time.</div>
     <ul class="foot-links">
       <li><a href="https://www.tiktok.com/@nellyhill77" target="_blank" rel="noopener">TikTok</a></li>
+      <li><a href="https://www.facebook.com/nellyhill" target="_blank" rel="noopener">Facebook</a></li>
       <li><a href="https://youtube.com/@AuntNellsFriends" target="_blank" rel="noopener">YouTube</a></li>
     </ul>
   </div>
@@ -658,6 +659,25 @@ footer a{color:#D8E4E0;}
     ifr.setAttribute("allowfullscreen", "");
     f.parentNode.replaceChild(ifr, f);
   });
+})();
+</script>
+<script>
+(function(){
+  // Outbound click beacon. Records only the destination host and which page it
+  // was clicked from - no identifiers, no per-person tracking.
+  document.addEventListener("click", function(ev){
+    var a = ev.target && ev.target.closest ? ev.target.closest("a[href]") : null;
+    if (!a) return;
+    var h;
+    try { h = new URL(a.href, location.href); } catch(e){ return; }
+    if (!/^https?:$/.test(h.protocol)) return;
+    if (h.hostname.replace(/^www\./, "") === location.hostname.replace(/^www\./, "")) return;
+    var body = JSON.stringify({ d: h.hostname.replace(/^www\./, ""), f: location.pathname });
+    try {
+      if (navigator.sendBeacon) navigator.sendBeacon("/api/click", new Blob([body], {type:"application/json"}));
+      else fetch("/api/click", {method:"POST", body: body, keepalive: true, headers:{"content-type":"application/json"}});
+    } catch(e){}
+  }, true);
 })();
 </script>
 </body>
