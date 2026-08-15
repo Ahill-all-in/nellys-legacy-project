@@ -169,11 +169,12 @@ async function sendTelegram(env, text) {
 // no race. Individual hit records still expire after 8 days; these do not.
 // ---- Aunt Nell quote collection over Telegram ---------------------------
 const QUOTE_PROMPTS = [
-  "What does Aunt Nell do that no other grown-up does?",
-  "What is the funniest thing Aunt Nell has ever done?",
-  "If you were telling a friend about Aunt Nell, what would you say?",
+  "What does she do that no other grown-up does?",
+  "What is the funniest thing she has ever done?",
+  "If you were telling a friend about her, what would you say?",
   "What is your favourite thing she reads or makes up?",
-  "What do you feel like when Aunt Nell is around?"
+  "What do you feel like when she is around?",
+  "What is the best place she has ever taken you, and what did you do there?"
 ];
 
 async function tg(env, method, payload) {
@@ -206,7 +207,7 @@ async function handleTelegramUpdate(env, update) {
 
   if (/^\/start/.test(text)) {
     await tg(env, "sendMessage", { chat_id: chatId, parse_mode: "HTML", text:
-      "<b>Aunt Nell's Friends</b>\n\nThis bot collects little quotes from kids about Aunt Nell, " +
+      "<b>Aunt Nell's Friends</b>\n\nThis bot collects little quotes from kids about Aunt Nell \u2014 NoNo, if that is what yours calls her \u2014 " +
       "to put on her site so other families know she is worth a watch.\n\n" +
       "Send <b>/quote</b> and I will give you a question to ask your kid. Then just type " +
       "what they say and send it, with their first name at the end if you like.\n\n" +
@@ -216,8 +217,9 @@ async function handleTelegramUpdate(env, update) {
   if (/^\/quote/.test(text)) {
     const q = QUOTE_PROMPTS[Math.floor(Date.now() / 60000) % QUOTE_PROMPTS.length];
     await tg(env, "sendMessage", { chat_id: chatId, parse_mode: "HTML", text:
-      `Ask them this, then send me their answer word for word:\n\n<b>${q}</b>\n\n` +
-      "<i>Their exact words are better than a tidy version. Wonky grammar is the point.</i>" });
+      `Ask them this \u2014 use whatever they call her, <b>Aunt Nell</b> or <b>NoNo</b> \u2014 then send me `
+      + `their answer word for word:\n\n<b>${q}</b>\n\n` +
+      "<i>Their exact words beat a tidy version every time. Wonky grammar is the point.</i>" });
     return;
   }
   if (m.voice || m.audio) {
