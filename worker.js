@@ -205,6 +205,16 @@ async function handleTelegramUpdate(env, update) {
   const from = [m.from && m.from.first_name, m.from && m.from.last_name].filter(Boolean).join(" ") || "someone";
   const text = (m.text || m.caption || "").trim();
 
+  // Deep link t.me/NellysLegacy_Bot?start=quote jumps straight to a question
+  if (/^\/start\s+quote/.test(text)) {
+    const q = QUOTE_PROMPTS[Math.floor(Date.now() / 60000) % QUOTE_PROMPTS.length];
+    await tg(env, "sendMessage", { chat_id: chatId, parse_mode: "HTML", text:
+      "<b>Aunt Nell's Friends</b>\n\nDanell reads stories to kids, and we are collecting little " +
+      "quotes from children about her for her website.\n\nAsk yours this \u2014 use whatever they " +
+      `call her, <b>Aunt Nell</b> or <b>NoNo</b>:\n\n<b>${q}</b>\n\n` +
+      "Send me their answer in their own words. Nothing goes public until Austin approves it." });
+    return;
+  }
   if (/^\/start/.test(text)) {
     await tg(env, "sendMessage", { chat_id: chatId, parse_mode: "HTML", text:
       "<b>Aunt Nell's Friends</b>\n\nThis bot collects little quotes from kids about Aunt Nell \u2014 NoNo, if that is what yours calls her \u2014 " +
