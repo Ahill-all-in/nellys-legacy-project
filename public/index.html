@@ -29,11 +29,35 @@
   "about": {
     "@type": "Person",
     "name": "Danell Hill",
-    "description": "AML (acute myeloid leukemia) survivor and stem cell transplant recipient. Creator of the children's YouTube channel Aunt Nell's Friends."
+    "alternateName": "Nell",
+    "description": "AML (acute myeloid leukemia) survivor and stem cell transplant recipient. Creator of the children's YouTube channel Aunt Nell's Friends.",
+    "sameAs": [
+      "https://www.youtube.com/@AuntNellsFriends",
+      "https://auntnellsfriends.com",
+      "https://www.tiktok.com/@nellyhill77",
+      "https://www.facebook.com/nellyhill"
+    ]
   },
   "publisher": {
     "@type": "Person",
     "name": "Austin Hill"
+  },
+  "mentions": [
+    {"@type": "MedicalOrganization", "name": "UK Markey Cancer Center", "url": "https://ukhealthcare.uky.edu/markey-cancer-center"},
+    {"@type": "MedicalOrganization", "name": "NMDP (formerly Be The Match)", "url": "https://www.nmdp.org"},
+    {"@type": "Organization", "name": "ClinicalTrials.gov", "url": "https://clinicaltrials.gov"},
+    {"@type": "Organization", "name": "The Patient Story", "url": "https://thepatientstory.com"},
+    {"@type": "Organization", "name": "NBMT Link", "url": "https://www.nbmtlink.org"},
+    {"@type": "Organization", "name": "Blood Cancer United", "url": "https://bloodcancerunited.org"}
+  ],
+  "video": {
+    "@type": "VideoObject",
+    "name": "Day 365 \u2014 One Year Since the Transplant That Gave Me More Time",
+    "description": "Danell Hill, one year after an unrelated-donor stem cell transplant for acute myeloid leukemia, on where things stand and what she is asking for.",
+    "thumbnailUrl": "https://nellyslegacyproject.com/images/day365-poster.jpg",
+    "contentUrl": "https://nellyslegacyproject.com/media/day365.mp4",
+    "uploadDate": "2026-08-15",
+    "duration": "PT2M59S"
   }
 }
 </script>
@@ -328,6 +352,15 @@ footer a{color:#D8E4E0;}
 .video-note{max-width:520px; margin:20px auto 0; text-align:center;
   font-size:0.92rem; color:#4E6067; line-height:1.55;}
 @media(max-width:600px){ .video-band{padding:44px 0 50px;} .video-frame{max-width:100%;} }
+
+.credits-band{background:var(--paper-warm); padding:58px 0 64px; border-top:1px solid var(--line);}
+.credit-list{list-style:none; padding:0; margin:26px auto 0; max-width:760px; display:grid; gap:2px;}
+.credit-list li{padding:15px 0; border-bottom:1px solid var(--line);}
+.credit-list li:last-child{border-bottom:none;}
+.credit-list a{font-family:'Fraunces',serif; font-size:1.08rem; color:var(--teal-deep); text-decoration:none; border-bottom:1px solid var(--gold);}
+.credit-list a:hover{color:var(--gold-deep);}
+.credit-list span{display:block; margin-top:5px; font-size:0.9rem; color:#4E6067; line-height:1.5;}
+
 
 
 /* ---------- FORK ---------- */
@@ -980,6 +1013,25 @@ footer a{color:#D8E4E0;}
         <a href="mailto:hello@nellyslegacyproject.com" style="color:#D9B872;">hello@nellyslegacyproject.com →</a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- GRATITUDE / REFERENCES -->
+<section id="credits" class="credits-band">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Gratitude</span>
+      <h2>The people and places in this story</h2>
+      <p>Every one of these had a hand in my still being here, or in what I know now.</p>
+    </div>
+    <ul class="credit-list">
+      <li><a href="https://ukhealthcare.uky.edu/markey-cancer-center" target="_blank" rel="noopener">UK Markey Cancer Center</a><span>Where I was diagnosed, treated, and transplanted. An NCI-designated comprehensive cancer center.</span></li>
+      <li><a href="https://www.nmdp.org" target="_blank" rel="noopener">NMDP (formerly Be The Match)</a><span>The registry that found my donor — a rare 12-out-of-12 match. Joining is free.</span></li>
+      <li><a href="https://clinicaltrials.gov" target="_blank" rel="noopener">ClinicalTrials.gov</a><span>Where the live count of AML trials on this page comes from.</span></li>
+      <li><a href="https://thepatientstory.com" target="_blank" rel="noopener">The Patient Story</a><span>First-person AML stories, including people years further out than me.</span></li>
+      <li><a href="https://www.nbmtlink.org" target="_blank" rel="noopener">NBMT Link</a><span>Transplant support and survivor accounts for patients and caregivers.</span></li>
+      <li><a href="https://bloodcancerunited.org" target="_blank" rel="noopener">Blood Cancer United</a><span>AML education, including the research webcast linked above.</span></li>
+    </ul>
   </div>
 </section>
 
