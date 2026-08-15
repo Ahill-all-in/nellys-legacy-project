@@ -313,6 +313,23 @@ footer a{color:#D8E4E0;}
 .connect-photo img{width:100%; border-radius:12px; display:block; box-shadow:0 14px 30px rgba(0,0,0,0.3);}
 .connect-photo figcaption{color:#D9B872; font-family:'Fraunces',serif; font-style:italic; text-align:center; margin-top:12px; font-size:0.9rem;}
 
+.pq{max-width:760px; margin:46px auto; padding:2px 0 2px 26px; border-left:3px solid var(--gold);}
+.pq p{font-family:'Fraunces',serif; font-style:italic; font-size:1.32rem; line-height:1.55; color:var(--teal-deep); margin:0 0 12px;}
+.pq cite{font-style:normal; font-family:'Libre Franklin',sans-serif; font-size:0.74rem; letter-spacing:.15em; text-transform:uppercase; color:#4E6067;}
+.pq-card{margin-top:14px; padding:12px 0 2px 14px; border-left:2px solid var(--gold);}
+.pq-card p{font-family:'Fraunces',serif; font-style:italic; font-size:1rem; line-height:1.5; color:var(--teal-deep); margin:0 0 8px;}
+.pq-card cite{font-style:normal; font-family:'Libre Franklin',sans-serif; font-size:0.68rem; letter-spacing:.14em; text-transform:uppercase; color:#4E6067;}
+@media(max-width:600px){ .pq{padding-left:18px; margin:32px auto;} .pq p{font-size:1.12rem;} }
+
+.video-band{background:var(--paper-warm); padding:64px 0 72px;}
+.video-frame{max-width:392px; margin:0 auto; border-radius:16px; overflow:hidden;
+  box-shadow:0 14px 46px rgba(21,37,48,.20); background:#000; line-height:0;}
+.video-frame video{display:block; width:100%; height:auto;}
+.video-note{max-width:520px; margin:20px auto 0; text-align:center;
+  font-size:0.92rem; color:#4E6067; line-height:1.55;}
+@media(max-width:600px){ .video-band{padding:44px 0 50px;} .video-frame{max-width:100%;} }
+
+
 /* ---------- FORK ---------- */
 .fork{padding:0 0 76px;}
 .fork-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
@@ -420,7 +437,8 @@ footer a{color:#D8E4E0;}
       <span></span><span></span><span></span>
     </button>
     <ul class="navlinks" id="nav-links">
-      <li><a href="#story">My Story</a></li>
+      <li><a href="#video">Her Video</a>
+        <a href="#story">My Story</a></li>
       <li><a href="#hope">Hope</a></li>
       <li><a href="#auntnell">Aunt Nell's Friends</a></li>
       <li><a href="#registry">Registry</a></li>
@@ -466,6 +484,28 @@ footer a{color:#D8E4E0;}
     </div>
   </div>
 </header>
+
+<!-- DAY 365 VIDEO -->
+<section id="video" class="video-band">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Day 365</span>
+      <h2>In my own words</h2>
+      <p>One year to the day since the transplant. Three minutes on where things
+         actually stand, and what I'm asking for.</p>
+    </div>
+    <div class="video-frame">
+      <video controls preload="none" playsinline
+             poster="images/day365-poster.jpg" width="720" height="1280">
+        <source src="media/day365.mp4" type="video/mp4">
+        Your browser can't play this video.
+        <a href="media/day365.mp4">Download it instead</a>.
+      </video>
+    </div>
+    <p class="video-note">Filmed on the transplant unit, one year after receiving
+       a stranger's stem cells.</p>
+  </div>
+</section>
 
 <!-- FORK: TWO PATHS -->
 <section class="fork">
@@ -526,12 +566,21 @@ footer a{color:#D8E4E0;}
       <p>Some numbers I don't forget.</p>
     </div>
 
-    <div class="timeline">
+<div class="pq">
+      <p>&ldquo;There is never a normal day around her &mdash; everything is special.&rdquo;</p>
+      <cite>&mdash; Mikala, one of my bonus kids</cite>
+    </div>
+
+        <div class="timeline">
       <div class="t-card">
         <span class="t-num">01</span>
         <h4>January 2025</h4>
         <p>After weeks of unexplained illness, my hemoglobin was found to be 2.4 — one of the lowest levels ever recorded at UK Hospital. I was diagnosed with acute myeloid leukemia (AML).</p>
         <p class="note" style="margin-top:10px;">(2.4 is the number that hit the family group chat that day. My actual chart says 2.7. Either way, not a number you want next to your name.)</p>
+        <div class="pq-card">
+          <p>&ldquo;She got diagnosed on Jaxon&rsquo;s birthday, but she didn&rsquo;t miss calling him to sing to him.&rdquo;</p>
+          <cite>&mdash; Mikala, one of my bonus kids</cite>
+        </div>
       </div>
       <div class="t-card">
         <span class="t-num">02</span>
@@ -576,6 +625,13 @@ footer a{color:#D8E4E0;}
 </div>
 
 <!-- HOPE -->
+<div class="wrap">
+  <div class="pq">
+      <p>&ldquo;She never lost sight of who she was.&rdquo;</p>
+      <cite>&mdash; Mikala, one of my bonus kids</cite>
+    </div>
+</div>
+
 <section id="hope" class="band-lav">
   <div class="wrap">
     <div class="section-head">
@@ -662,6 +718,11 @@ footer a{color:#D8E4E0;}
       <span class="eyebrow">The Ask</span>
       <h2>What I'm hoping for</h2>
       <p>In the next 12 to 18 months, I want to see beaches and a few new places while this window is open. I'm not picky about how that happens. Miles, hotel points, a timeshare week, a place to stay, connections, or dollars — if you have something to offer, I'll gladly take it. Here's where things stand right now, and a few concrete ways in.</p>
+    </div>
+
+    <div class="pq">
+      <p>&ldquo;Nobody &mdash; and I mean NOBODY &mdash; could have fought cancer the way she did, and is still doing.&rdquo;</p>
+      <cite>&mdash; Mikala, one of my bonus kids</cite>
     </div>
 
     <div class="help-grid">
