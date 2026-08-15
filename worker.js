@@ -29,6 +29,7 @@ async function getPending(env) {
 // nothing that could tie a visit back to a person. Aggregate counts only.
 const TRACK_PATHS = new Set(["/", "/index.html", "/newly-diagnosed-aml",
   "/newly-diagnosed-aml.html", "/aml-caregiver-guide", "/aml-caregiver-guide.html",
+  "/gift-travel", "/gift-travel.html",
   "/llms.txt", "/sitemap.xml"]);
 
 function dayKey(d = new Date()) {

@@ -411,35 +411,49 @@ footer a{color:#D8E4E0;}
 
 
 /* ---------- FORK ---------- */
-.fork{padding:0 0 76px;}
-.fork-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+.fork{padding:10px 0 82px;}
+.doors-head{text-align:center; max-width:660px; margin:0 auto 38px;}
+.doors-head .eyebrow{display:block; margin-bottom:14px;}
+.doors-head h2{font-family:'Fraunces',serif; font-size:clamp(1.9rem,4vw,2.6rem);
+  font-weight:600; color:var(--teal-deep); line-height:1.15; margin:0 0 14px;}
+.doors-head p{color:#43585F; font-size:1.03rem; line-height:1.6; margin:0;}
+.fork-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
 @media(max-width:760px){ .fork-grid{grid-template-columns:1fr;} }
 .fork-card{
-  display:block; border-radius:16px; padding:36px 32px;
+  display:flex; flex-direction:column; border-radius:16px; padding:34px 32px 30px;
   text-decoration:none; transition:transform 0.15s ease, box-shadow 0.15s ease;
 }
 .fork-card:hover{transform:translateY(-3px); text-decoration:none;}
-.fork-give{
-  background:var(--teal-deep); color:#fff;
-  box-shadow:0 14px 34px rgba(21,52,71,0.28);
+.fork-card h3{font-family:'Fraunces',serif; font-size:1.42rem; font-weight:600;
+  line-height:1.25; margin:0;}
+.fork-card p{font-size:1rem; line-height:1.62; margin:12px 0 20px; flex:1;}
+.fork-arrow{font-weight:700; font-size:0.95rem;}
+.fork-eyebrow{
+  font-size:0.74rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:700;
+  display:block; margin-bottom:11px;
 }
-.fork-give h3{color:#fff;}
-.fork-give p{color:#C2DEE4; font-size:0.98rem; margin:10px 0 18px;}
-.fork-connect{
+/* filled — the two doors for people who need help */
+.fork-diagnosed{
+  background:var(--teal-deep); color:#fff;
+  box-shadow:0 16px 38px rgba(21,52,71,0.30);
+}
+.fork-caregiver{
+  background:var(--teal); color:#fff;
+  box-shadow:0 16px 38px rgba(47,107,122,0.28);
+}
+.fork-diagnosed h3, .fork-caregiver h3{color:#fff;}
+.fork-diagnosed p, .fork-caregiver p{color:#D3E7EC;}
+.fork-diagnosed .fork-eyebrow, .fork-caregiver .fork-eyebrow{color:var(--gold);}
+.fork-diagnosed .fork-arrow, .fork-caregiver .fork-arrow{color:#EBCF95;}
+/* outlined — the two doors for people who are okay */
+.fork-connect, .fork-give{
   background:#fff; border:1.5px solid var(--line);
   box-shadow:0 10px 26px rgba(21,37,48,0.08);
 }
-.fork-connect h3{color:var(--teal-deep);}
-.fork-connect p{color:#43585F; font-size:0.98rem; margin:10px 0 18px;}
-.fork-eyebrow{
-  font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:700;
-  color:var(--gold); display:block; margin-bottom:12px;
-}
-.fork-connect .fork-eyebrow{color:var(--gold-deep);}
-.fork-card h3{font-family:'Fraunces',serif; font-size:1.4rem; font-weight:600;}
-.fork-arrow{font-weight:600; font-size:0.92rem;}
-.fork-give .fork-arrow{color:#D9B872;}
-.fork-connect .fork-arrow{color:var(--gold-deep);}
+.fork-connect h3, .fork-give h3{color:var(--teal-deep);}
+.fork-connect p, .fork-give p{color:#43585F;}
+.fork-connect .fork-eyebrow, .fork-give .fork-eyebrow{color:var(--gold-deep);}
+.fork-connect .fork-arrow, .fork-give .fork-arrow{color:var(--gold-deep);}
 
 /* ---------- REGISTRY CALLOUT ---------- */
 .registry{
@@ -520,9 +534,10 @@ footer a{color:#D8E4E0;}
       <li><a href="#video">Her Video</a></li>
       <li><a href="#story">My Story</a></li>
       <li><a href="/newly-diagnosed-aml">Just Diagnosed</a></li>
-      <li><a href="/aml-caregiver-guide">For Caregivers</a></li>
+      <li><a href="/aml-caregiver-guide">Caregivers</a></li>
+      <li><a href="/gift-travel">Gift Travel</a></li>
       <li><a href="#hope">Hope</a></li>
-      <li><a href="#auntnell">Aunt Nell's Friends</a></li>
+      <li><a href="#auntnell">Aunt Nell's</a></li>
       <li><a href="#registry">Registry</a></li>
       <li><a href="#help">Ways to Help</a></li>
       <li><a href="#connect">Connect</a></li>
@@ -596,21 +611,53 @@ footer a{color:#D8E4E0;}
   </div>
 </section>
 
-<!-- FORK: TWO PATHS -->
-<section class="fork">
-  <div class="wrap fork-grid">
-    <a href="#help" class="fork-card fork-give">
-      <span class="fork-eyebrow">Want to help?</span>
-      <h3>Give a trip, points, or a dollar</h3>
-      <p>Miles, hotel points, a place to stay, or a donation — see the ways in.</p>
-      <span class="fork-arrow">See how to help →</span>
-    </a>
-    <a href="#connect" class="fork-card fork-connect">
-      <span class="fork-eyebrow">On your own journey?</span>
-      <h3>Talk to someone who's been there</h3>
-      <p>Going through AML or a transplant, yourself or someone you love? I'd like to hear from you.</p>
-      <span class="fork-arrow">Connect with me →</span>
-    </a>
+<!-- FORK: FOUR DOORS -->
+<section class="fork" id="start-here">
+  <div class="wrap">
+    <div class="doors-head">
+      <span class="eyebrow">Start Here</span>
+      <h2>Wherever you are, there&rsquo;s a door</h2>
+      <p>Newly diagnosed, caring for someone, further down your own road, or just wanting
+         to help &mdash; pick whichever one sounds most like you today.</p>
+    </div>
+    <div class="fork-grid">
+
+      <a href="/newly-diagnosed-aml" class="fork-card fork-diagnosed">
+        <span class="fork-eyebrow">Just diagnosed with AML?</span>
+        <h3>Start here. Plain language, no fine print.</h3>
+        <p>What to watch to finally understand your own blood counts, the talk I send every
+           newly diagnosed family, and four free ways to reach someone who has already been
+           exactly where you are right now.</p>
+        <span class="fork-arrow">Read: Just diagnosed with AML &rarr;</span>
+      </a>
+
+      <a href="/aml-caregiver-guide" class="fork-card fork-caregiver">
+        <span class="fork-eyebrow">Caring for someone?</span>
+        <h3>What I wish someone had told us</h3>
+        <p>My husband Austin&rsquo;s notes from my transplant stay &mdash; which comfort items
+           were actually worth it, how to advocate when your person is miserable, and where
+           caregivers can find support of their own.</p>
+        <span class="fork-arrow">Read the caregiver guide &rarr;</span>
+      </a>
+
+      <a href="#connect" class="fork-card fork-connect">
+        <span class="fork-eyebrow">Been through it yourself?</span>
+        <h3>I&rsquo;d like to hear from you</h3>
+        <p>Survivor, donor, caregiver, or still in the thick of it &mdash; tell me where you
+           are. I read every message myself.</p>
+        <span class="fork-arrow">Connect with me &rarr;</span>
+      </a>
+
+      <a href="#help" class="fork-card fork-give">
+        <span class="fork-eyebrow">Want to help?</span>
+        <h3>Give a trip, a stay, points, or a dollar</h3>
+        <p>Airline miles, hotel points, a week somewhere you aren&rsquo;t using, or a donation.
+           There&rsquo;s a step-by-step guide for the travel side, because it is far more
+           confusing than it ought to be.</p>
+        <span class="fork-arrow">See the ways to help &rarr;</span>
+      </a>
+
+    </div>
   </div>
 </section>
 
@@ -824,8 +871,8 @@ footer a{color:#D8E4E0;}
       <div class="help-card">
         <span class="help-tag">Anything Helps</span>
         <h3>Miles, points &amp; a place to stay</h3>
-        <p>Airline miles, hotel points, a timeshare week, a beach house sitting empty for a weekend — that's exactly the kind of help that gets me somewhere new.</p>
-        <a href="mailto:hello@nellyslegacyproject.com">Get in touch →</a>
+        <p>Airline miles, hotel points, a timeshare week, a beach house sitting empty for a weekend — that's exactly the kind of help that gets me somewhere new. I wrote a short guide, because every program does it differently and most of them charge you for the privilege.</p>
+        <a href="/gift-travel">Read the gifting guide →</a>
       </div>
       <div class="help-card">
         <span class="help-tag">March 2027</span>
@@ -872,34 +919,6 @@ footer a{color:#D8E4E0;}
     <path d="M2 12 Q 20 2, 35 12 T 68 12 T 101 12 T 138 12" fill="none" stroke="#2F6B7A" stroke-width="2.5" stroke-linecap="round"/>
   </svg>
 </div>
-
-<!-- FOR CAREGIVERS -->
-<section id="caregivers" class="band-lav">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">For Caregivers</span>
-      <h2>What I wish someone had told me</h2>
-      <p>When I was admitted for my transplant stay, my husband Austin kept notes on what actually
-         helped &mdash; the practical stuff nobody mentions in the intake paperwork. Which comfort items
-         were worth it, how to advocate when your person is uncomfortable, and where caregivers can
-         get support for themselves.</p>
-      <p style="margin-top:18px;"><a href="/aml-caregiver-guide" class="btn btn-primary">Read the caregiver guide &rarr;</a></p>
-    </div>
-  </div>
-</section>
-
-<section id="start-here">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">New to This?</span>
-      <h2>A few things that helped me</h2>
-      <p>If you or someone you love was just diagnosed, I put everything I share first on one page &mdash;
-         what to watch to finally understand your own blood, the talk I send every newly diagnosed family,
-         and four free ways to reach someone who has already been where you are.</p>
-      <p style="margin-top:18px;"><a href="/newly-diagnosed-aml" class="btn btn-primary">Just diagnosed? Start here &rarr;</a></p>
-    </div>
-  </div>
-</section>
 
 <section id="story-wall" class="band-lav">
   <div class="wrap">

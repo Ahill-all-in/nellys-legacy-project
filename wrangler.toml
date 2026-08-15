@@ -7,7 +7,7 @@ directory = "./public"
 binding = "ASSETS"
 # run the Worker before serving these HTML routes so page views get logged;
 # every other asset (images, video, css) still comes straight off the edge
-run_worker_first = ["/", "/newly-diagnosed-aml", "/aml-caregiver-guide", "/index.html", "/newly-diagnosed-aml.html", "/aml-caregiver-guide.html", "/llms.txt", "/sitemap.xml"]
+run_worker_first = ["/", "/newly-diagnosed-aml", "/aml-caregiver-guide", "/index.html", "/newly-diagnosed-aml.html", "/aml-caregiver-guide.html", "/gift-travel", "/gift-travel.html", "/llms.txt", "/sitemap.xml"]
 
 [[kv_namespaces]]
 binding = "STORIES"
