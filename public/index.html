@@ -65,8 +65,10 @@
     "description": "Danell Hill, one year after an unrelated-donor stem cell transplant for acute myeloid leukemia, on where things stand and what she is asking for.",
     "thumbnailUrl": "https://nellyslegacyproject.com/images/day365-poster.jpg",
     "contentUrl": "https://nellyslegacyproject.com/media/day365.mp4",
+    "embedUrl": "https://www.youtube.com/embed/x5Qfn014k64",
+    "url": "https://youtu.be/x5Qfn014k64",
     "uploadDate": "2026-08-15",
-    "duration": "PT2M59S"
+    "duration": "PT3M6S"
   }
 }
 </script>
@@ -370,6 +372,19 @@ footer a{color:#D8E4E0;}
 .btn-share.is-done{background:var(--teal); color:#fff; border-color:var(--teal);}
 @media(max-width:600px){ .video-band{padding:44px 0 50px;} .video-frame{max-width:100%;} }
 
+.yt-facade{display:block; width:100%; padding:0; border:0; background:#000; cursor:pointer; position:relative; line-height:0;}
+.yt-facade img{display:block; width:100%; height:auto;}
+.yt-play{position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.28)); transition:background .2s ease;}
+.yt-play svg{width:78px; height:55px;}
+.yt-play .yt-tri{fill:#212121; fill-opacity:.82; transition:fill .2s ease, fill-opacity .2s ease;}
+.yt-facade:hover .yt-play .yt-tri{fill:#f00; fill-opacity:1;}
+.yt-facade:focus-visible{outline:3px solid var(--gold); outline-offset:3px;}
+.video-frame iframe{display:block; width:100%; aspect-ratio:9/16; border:0;}
+.video-alt{margin-top:12px; text-align:center; font-size:0.82rem;}
+.video-alt a{color:#4E6067;}
+
+
 .credits-band{background:var(--paper-warm); padding:58px 0 64px; border-top:1px solid var(--line);}
 .credit-list{list-style:none; padding:0; margin:26px auto 0; max-width:760px; display:grid; gap:2px;}
 .credit-list li{padding:15px 0; border-bottom:1px solid var(--line);}
@@ -545,12 +560,12 @@ footer a{color:#D8E4E0;}
          actually stand, and what I'm asking for.</p>
     </div>
     <div class="video-frame">
-      <video controls preload="none" playsinline
-             poster="images/day365-poster.jpg" width="720" height="1280">
-        <source src="media/day365.mp4" type="video/mp4">
-        Your browser can't play this video.
-        <a href="media/day365.mp4">Download it instead</a>.
-      </video>
+      <button type="button" class="yt-facade" id="yt-facade" data-yt="x5Qfn014k64"
+              aria-label="Play Danell's video: one year after her transplant">
+        <img src="images/day365-poster.jpg" width="720" height="1280"
+             alt="Danell smiling in a tiara on the transplant unit, one year after her stem cell transplant">
+        <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 68 48"><path class="yt-tri" d="M66.5 7.7c-.8-2.9-3.1-5.2-6-6C55.2 0 34 0 34 0S12.8 0 7.5 1.7c-2.9.8-5.2 3.1-6 6C0 13 0 24 0 24s0 11 1.5 16.3c.8 2.9 3.1 5.2 6 6C12.8 48 34 48 34 48s21.2 0 26.5-1.7c2.9-.8 5.2-3.1 6-6C68 35 68 24 68 24s0-11-1.5-16.3z"/><path d="M45 24 27 14v20z" fill="#fff"/></svg></span>
+      </button>
     </div>
     <div class="video-actions">
       <button type="button" class="btn btn-share" id="share-video" aria-live="polite">
@@ -558,6 +573,7 @@ footer a{color:#D8E4E0;}
         <span id="share-label">Share Nell's story</span>
       </button>
     </div>
+    <p class="video-alt"><a href="https://youtu.be/x5Qfn014k64" target="_blank" rel="noopener">Watch on YouTube</a> &middot; <a href="media/day365.mp4">direct video file</a></p>
     <p class="video-note">Filmed on the transplant unit, one year after receiving
        a stranger's stem cells.</p>
   </div>
@@ -1107,6 +1123,21 @@ footer a{color:#D8E4E0;}
       navigator.share({ title: title, text: text, url: url })
         .catch(function(err){ if (err && err.name !== "AbortError") copyFallback(); });
     } else { copyFallback(); }
+  });
+})();
+</script>
+<script>
+(function(){
+  var f = document.getElementById("yt-facade");
+  if (!f) return;
+  f.addEventListener("click", function(){
+    var id = f.getAttribute("data-yt");
+    var ifr = document.createElement("iframe");
+    ifr.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0&playsinline=1";
+    ifr.title = "Danell's Day 365 video";
+    ifr.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    ifr.setAttribute("allowfullscreen", "");
+    f.parentNode.replaceChild(ifr, f);
   });
 })();
 </script>
