@@ -351,6 +351,14 @@ footer a{color:#D8E4E0;}
 .video-frame video{display:block; width:100%; height:auto;}
 .video-note{max-width:520px; margin:20px auto 0; text-align:center;
   font-size:0.92rem; color:#4E6067; line-height:1.55;}
+
+.video-actions{text-align:center; margin-top:22px;}
+.btn-share{background:transparent; border:1.5px solid var(--teal); color:var(--teal-deep);
+  cursor:pointer; display:inline-flex; align-items:center; gap:9px; font-family:inherit;}
+.btn-share:hover{background:var(--teal); color:#fff; transform:translateY(-2px);}
+.btn-share svg{width:17px; height:17px; fill:none; stroke:currentColor;
+  stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round;}
+.btn-share.is-done{background:var(--teal); color:#fff; border-color:var(--teal);}
 @media(max-width:600px){ .video-band{padding:44px 0 50px;} .video-frame{max-width:100%;} }
 
 .credits-band{background:var(--paper-warm); padding:58px 0 64px; border-top:1px solid var(--line);}
@@ -534,6 +542,12 @@ footer a{color:#D8E4E0;}
         Your browser can't play this video.
         <a href="media/day365.mp4">Download it instead</a>.
       </video>
+    </div>
+    <div class="video-actions">
+      <button type="button" class="btn btn-share" id="share-video" aria-live="polite">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/></svg>
+        <span id="share-label">Share Nell's story</span>
+      </button>
     </div>
     <p class="video-note">Filmed on the transplant unit, one year after receiving
        a stranger's stem cells.</p>
@@ -1048,5 +1062,44 @@ footer a{color:#D8E4E0;}
   </div>
 </footer>
 
+<script>
+(function(){
+  var btn = document.getElementById("share-video");
+  if (!btn) return;
+  var label = document.getElementById("share-label");
+  var url   = "https://nellyslegacyproject.com/#video";
+  var title = "Danell's Journey \u2014 Day 365";
+  var text  = "One year since the stem cell transplant that gave her more time. Three minutes, in her own words.";
+
+  function flash(msg){
+    var prev = label.textContent;
+    label.textContent = msg;
+    btn.classList.add("is-done");
+    setTimeout(function(){ label.textContent = prev; btn.classList.remove("is-done"); }, 2200);
+  }
+  function copyFallback(){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(function(){ flash("Link copied"); })
+        .catch(function(){ legacyCopy(); });
+    } else { legacyCopy(); }
+  }
+  function legacyCopy(){
+    try {
+      var ta = document.createElement("textarea");
+      ta.value = url; ta.setAttribute("readonly", "");
+      ta.style.position = "absolute"; ta.style.left = "-9999px";
+      document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); document.body.removeChild(ta);
+      flash("Link copied");
+    } catch (e) { flash("Copy this page's link"); }
+  }
+  btn.addEventListener("click", function(){
+    if (navigator.share) {
+      navigator.share({ title: title, text: text, url: url })
+        .catch(function(err){ if (err && err.name !== "AbortError") copyFallback(); });
+    } else { copyFallback(); }
+  });
+})();
+</script>
 </body>
 </html>
