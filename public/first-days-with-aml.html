@@ -490,6 +490,13 @@ footer a{color:#D8E4E0;}
   width:9px; height:9px; border-radius:50%; background:var(--gold);
 }
 .kit-list strong{color:var(--teal-deep);}
+
+.odds{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin:30px 0 6px;}
+@media(max-width:760px){ .odds{grid-template-columns:1fr;} }
+.odd{background:#fff; border:1.5px solid var(--line); border-radius:14px; padding:22px 20px;}
+.odd b{display:block; font-family:'Fraunces',serif; font-size:1.9rem; color:var(--teal-deep); line-height:1.1;}
+.odd span{display:block; font-size:0.92rem; color:#5A6E75; margin-top:8px; line-height:1.5;}
+.odd-good b{color:#1F6B4A;}
 </style>
 </head>
 <body>
@@ -784,6 +791,126 @@ footer a{color:#D8E4E0;}
     </div>
   </div>
 </section>
+
+<!-- PLATELETS -->
+<section id="platelets" class="band-lav">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The One That Blindsided Us</span>
+      <h2>When platelet transfusions stop working</h2>
+      <p>This one deserves its own section, because it happened to Danell, it is genuinely frightening,
+         and the numbers you will find online are mostly out of date and much scarier than the truth.</p>
+    </div>
+
+    <p style="max-width:780px; line-height:1.75;">Partway through treatment, her platelet transfusions
+       stopped holding. Her body had made antibodies against donor platelets, so ordinary units were
+       destroyed almost as fast as they went in. She needed <strong>HLA-matched platelets</strong>
+       &mdash; platelets from a donor whose tissue type matches hers closely enough that her immune
+       system leaves them alone.</p>
+
+    <p style="max-width:780px; line-height:1.75; margin-top:16px;">Those do not sit on a shelf. They had
+       to find a matching donor, bring that person in, and fly the platelets to us. We spent days in the
+       emergency department with a nosebleed that would not stop, unable to be given the ordinary
+       platelets sitting in the same building, waiting for the right ones to land. That is a specific
+       kind of helpless I had not experienced before.</p>
+
+    <div class="fd-note">
+      <h4>If this is happening to you right now</h4>
+      <p>The waiting is real and it is documented: blood centres quote <strong>48 to 72 hours</strong> to
+         source the first matched unit, longer if your centre has to recruit donors rather than search an
+         existing HLA-typed pool. You are not being deprioritised. Ask your team how big their HLA-typed
+         donor pool is, and whether a larger regional centre can be asked.</p>
+      <p>And when a good match is found, it usually works &mdash; in the largest published series,
+         <strong>84%</strong> of matched transfusions produced a solid response.</p>
+    </div>
+
+    <h3 style="font-family:'Fraunces',serif; color:var(--teal-deep); font-size:1.5rem; margin:42px 0 6px;">
+      Now the part nobody told us: the actual odds</h3>
+    <p style="max-width:780px; line-height:1.72;">If your platelet counts stop responding, the first
+       thing everyone assumes &mdash; the thing we assumed &mdash; is that the body is rejecting them.
+       That is usually wrong, and the difference matters enormously.</p>
+
+    <div class="odds">
+      <div class="odd">
+        <b>~12&ndash;27%</b>
+        <span>of people going through intensive AML treatment will meet a formal definition of platelet
+          refractoriness at some point. Older sources say 30&ndash;70%; those are from before modern
+          blood filtering and overstate today's risk.</span>
+      </div>
+      <div class="odd odd-good">
+        <b>~2 in 3</b>
+        <span>of those cases are <strong>not</strong> immune at all. Fever, infection, bleeding,
+          an enlarged spleen and certain drugs consume platelets just as effectively as antibodies do.
+          In the best study, non-immune factors were the only cause in 67% of failed transfusions.</span>
+      </div>
+      <div class="odd odd-good">
+        <b>~5%</b>
+        <span>of patients on this treatment path actually end up needing HLA-matched platelets, down
+          from about 14% before filtered blood products became standard. Danell was in that small
+          group.</span>
+      </div>
+    </div>
+
+    <p style="max-width:780px; line-height:1.75; margin-top:26px;">That middle number is the one I wish
+       someone had said out loud to us in the ED. <strong>&ldquo;Her body is attacking the platelets&rdquo;
+       is the least likely explanation, not the most likely.</strong> Most of the time the platelets are
+       being eaten by a fever or an infection, which is a very different problem with a very different
+       fix. The only thing that actually settles it is an antibody test &mdash; not how fast the counts
+       fell, and not how the transfusion &ldquo;felt.&rdquo;</p>
+
+    <p style="max-width:780px; line-height:1.75; margin-top:16px;">The reason today is better than the
+       older numbers suggest is unglamorous: filtering white cells out of blood products, which nearly
+       every American blood centre now does as standard. When one country switched to it nationally,
+       immune refractoriness in leukaemia patients fell from <strong>14% to 4%</strong>. Worth confirming
+       your hospital uses filtered products. Almost all do.</p>
+
+    <div class="fd-note">
+      <h4>One thing to know if you have been pregnant</h4>
+      <p>Pregnancy exposes you to another person's tissue type, so it raises the chance of carrying the
+         antibodies behind this. In healthy donors, HLA antibodies show up in about 1.7% of women who
+         have never been pregnant, 11% after one pregnancy, and around 32% after four or more.</p>
+      <p>But carrying antibodies is not the same as becoming refractory &mdash; most women with them
+         transfuse perfectly well. And the single biggest risk factor is not pregnancy at all, it is
+         simply <strong>how many platelet transfusions you have had</strong>. Nobody mentioned any of
+         this to us, and it would have made the whole thing feel less like a mystery.</p>
+    </div>
+
+    <h3 style="font-family:'Fraunces',serif; color:var(--teal-deep); font-size:1.5rem; margin:42px 0 10px;">
+      What to ask, in order</h3>
+    <ul class="kit-list">
+      <li><strong>&ldquo;Have you ruled out the non-immune causes?&rdquo;</strong> Fever, infection,
+          bleeding, DIC, an enlarged spleen, graft-versus-host disease &mdash; and drugs, especially
+          amphotericin B, vancomycin, heparin and ATG. This is where two thirds of cases actually live.</li>
+      <li><strong>&ldquo;Has an HLA and HPA antibody screen been sent, and what did it show?&rdquo;</strong>
+          This is the test that decides immune versus non-immune. Everything else is a guess.</li>
+      <li><strong>&ldquo;Are the post-transfusion counts being drawn 10 to 60 minutes after, not just the
+          next morning?&rdquo;</strong> A next-morning number cannot tell the two apart.</li>
+      <li><strong>&ldquo;Can we try crossmatch-compatible platelets first?&rdquo;</strong> Often available
+          within 24 hours rather than 48 to 72, and about as effective as a full HLA match.</li>
+      <li><strong>&ldquo;What match grade are we getting?&rdquo;</strong> Grades A, B1U and B2U work well.
+          C and D matches may perform no better than ordinary platelets.</li>
+      <li><strong>&ldquo;Should family donate?&rdquo;</strong> Ask this one <em>before</em> anyone
+          volunteers. If a related-donor stem cell transplant is possible, family platelets can create
+          antibodies that interfere with engraftment later. It is easy to miss in the moment and hard to
+          undo.</li>
+      <li><strong>&ldquo;Is this likely to settle once her counts recover?&rdquo;</strong> For most
+          people it does. That was true for us too, eventually.</li>
+    </ul>
+
+    <p style="max-width:780px; line-height:1.72; margin-top:24px; font-size:0.9rem; color:#6A7B80;">
+       One honest note: refractoriness is linked in studies to more bleeding and more transfusions, and
+       researchers are careful about why &mdash; it may be a sign of being more seriously ill rather than
+       a cause of worse outcomes. As of 2025 the American Society of Hematology says the effect of
+       matched platelets on survival is still not clear. What is clear is that it makes treatment harder,
+       slower and far more frightening, which is reason enough to be ready for it.</p>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 140 20" xmlns="http://www.w3.org/2000/svg">
+    <path d="M2 12 Q 20 2, 35 12 T 68 12 T 101 12 T 138 12" fill="none" stroke="#C9A66B" stroke-width="2.5" stroke-linecap="round"/>
+  </svg>
+</div>
 
 <!-- FIRST WEEK PRACTICAL -->
 <section id="week-one">
