@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Danell's Journey &mdash; AML Survivor Story, Support &amp; Resources</title>
+<title>PREVIEW — Danell's Journey &mdash; AML Survivor Story, Support &amp; Resources</title>
 <meta name="description" content="One woman's acute myeloid leukemia (AML) and stem cell transplant story, plus free peer support, caregiver resources, and clinical trial information for anyone newly diagnosed with AML or supporting someone who is.">
-<link rel="canonical" href="https://nellyslegacyproject.com/">
+<meta name="robots" content="noindex,nofollow">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Danell's Journey — AML Survivor &amp; Stem Cell Transplant Story">
@@ -189,6 +189,16 @@ nav .wrap{
   display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;
 }
 @media(max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
+/* mobile: lead with her face, not with a wall of text */
+@media(max-width:760px){
+  .hero{padding-top:26px;}
+  .hero-grid{display:flex; flex-direction:column; gap:26px;}
+  .hero-grid .photo-frame{order:-1; margin:0;}
+  .hero-grid .photo-frame img{max-height:46vh; width:100%; object-fit:cover; object-position:center 22%;}
+  .hero h1{font-size:clamp(2rem,8.5vw,2.6rem); line-height:1.1;}
+  .hero .lede{font-size:1rem; line-height:1.55;}
+  .cta-row .btn{flex:1 1 44%; text-align:center;}
+}
 
 .eyebrow{
   font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase;
@@ -568,11 +578,16 @@ footer a{color:#D8E4E0;}
   <div class="wrap hero-grid">
     <div>
       <span class="eyebrow">Time, Borrowed and Well Spent</span>
-      <h1>I'm not cured.<br>I've been given <em>time</em>.</h1>
-      <p class="lede">In January 2025, I was days from a coma. I'm in remission now — but my leukemia carries higher-risk mutations, and most relapses after transplant happen within the first two years. I'm not waiting to find out. I'm living now, on purpose, while reading storybooks to kids along the way.</p>
+      <h1>The grandkids call me <em>NoNo</em>.</h1>
+      <p class="lede">On the beach I do the T&nbsp;Rex walk &mdash; little arms, big stomping, the whole
+         production &mdash; until somebody falls over laughing. There's ice cream on the first day of
+         school and the last day of school, every year, no exceptions. I read picture books out loud to
+         anybody's kids who'll sit still for one.</p>
+      <p class="lede">I also have leukemia, and I'm not cured. I've got time, and nobody will tell me
+         how much of it. So I'm spending it.</p>
       <div class="cta-row">
         <a href="#story" class="btn btn-primary">Read my story</a>
-        <a href="#help" class="btn btn-ghost">Ways to help</a>
+        <a href="#start-here" class="btn btn-ghost">Just diagnosed? Start here</a>
       </div>
     </div>
     <div class="photo-frame">
@@ -711,7 +726,10 @@ footer a{color:#D8E4E0;}
       <div class="t-card">
         <span class="t-num">01</span>
         <h4>January 2025</h4>
-        <p>After weeks of unexplained illness, my hemoglobin was found to be 2.4 — one of the lowest levels ever recorded at UK Hospital. I was diagnosed with acute myeloid leukemia (AML).</p>
+        <p>After weeks of unexplained illness, my hemoglobin came back at 2.4. The nurses' faces told
+           me most of what I needed to know before anyone said the word leukemia.</p>
+        <p>It was also my grandson Jaxon's birthday. I called him from the room and sang to him anyway,
+           because you don't skip that.</p>
         <p class="note" style="margin-top:10px;">(2.4 is the number that hit the family group chat that day. My actual chart says 2.7. Either way, not a number you want next to your name.)</p>
         <div class="pq-card">
           <p>&ldquo;She got diagnosed on Jaxon&rsquo;s birthday, but she didn&rsquo;t miss calling him to sing to him.&rdquo;</p>
@@ -747,9 +765,17 @@ footer a{color:#D8E4E0;}
       </figure>
     </div>
     <div class="story-body">
-      <p><strong>Remission is not the same as being cured.</strong> My leukemia carries higher-risk mutations, and with AML, most relapses after transplant happen within the first two years. That's the honest math my family and I live with: this isn't a victory lap, it's real, uncertain time — and we've chosen not to wait around and hope for more of it.</p>
-      <p>Even on hard pain days, I show up publicly and honestly — documenting my treatment on TikTok, and in doing so, connecting with a community of fellow transplant patients. Many are just beginning the road I've already walked. I tell them what's coming. What helped me. What I wish someone had told me.</p>
-      <p>So my family and I are front-loading everything we can, now. If the remission lasts longer than expected, no one will regret having lived fully in the meantime — and we'll be the first to stop asking for help. But most of what we do together right now is likely the only time, or the last time, I get to live it. That's why the timing on the things below actually matters.</p>
+      <p><strong>Remission is not the same as being cured.</strong> My leukemia carries higher-risk
+         mutations, and with AML, most relapses after transplant happen within the first two years.
+         In January 2025 I was days from a coma. I know exactly how fast this can move.</p>
+      <p>So this isn't a victory lap. It's real, uncertain time, and we've decided not to sit around
+         waiting to find out how much of it there is.</p>
+      <p>I post the bad days too. There's a photo of me on the transplant unit in a frog hat, and one
+         of me pulling a face in an oxygen mask. I've really been through it, and I'm still laughing
+         &mdash; that's the part I want other patients to see.</p>
+      <p>Most of the people who find me on TikTok are just starting the road I've already walked. So I
+         tell them what's coming, what helped me, and what I wish someone had told me.</p>
+      <p>So we're doing it all now. Everything we can, while I can. If the remission lasts longer than expected, no one will regret having lived fully in the meantime — and we'll be the first to stop asking for help. But most of what we do together right now is likely the only time, or the last time, I get to live it. That's why the timing on the things below actually matters.</p>
     </div>
   </div>
 </section>
@@ -826,7 +852,7 @@ footer a{color:#D8E4E0;}
       <span class="eyebrow">My Legacy Project</span>
       <h2 style="margin-bottom:16px;">Aunt Nell's Friends</h2>
       <p style="color:#43585F; font-size:1.05rem; margin-bottom:20px;">Join me as I discover our world through play and stories. I am a mom, a grandma, and an aunt to many more. They may not all be my DNA, but they are all family in my heart.</p>
-      <p style="color:#43585F; font-size:1.05rem; margin-bottom:20px;">I've always believed in what a young imagination can do, and I've always had a special way of connecting with kids — slowing down, getting on their level, letting them lead. Some of my favorite moments in this whole life have been reading bedtime stories to our own grandkids, watching their faces while a book comes alive in front of them.</p>
+      <p style="color:#43585F; font-size:1.05rem; margin-bottom:20px;">There are Happy Meals and Pokémon cards. There's a Taylor Swift song on in the car. There are Legos all over the floor and I am usually the one on the floor with them. Some of my favourite moments in this whole life have been reading bedtime stories to our grandkids and watching their faces while the book comes alive in front of them.</p>
       <p style="color:#43585F; font-size:1.05rem;">On my YouTube channel, I read picture books, color, and play outdoors with kids — building something joyful and educational. This is my legacy project: I want to keep giving to kids, keep showing up for their imaginations, long after I've lost this fight. If I can't be here in person someday, I want to still be here in this way.</p>
       <div style="margin-top:26px;">
         <a href="https://youtube.com/@AuntNellsFriends" class="btn btn-primary" target="_blank" rel="noopener">Watch on YouTube</a>
@@ -853,7 +879,7 @@ footer a{color:#D8E4E0;}
     <div class="section-head">
       <span class="eyebrow">The Ask</span>
       <h2>What I'm hoping for</h2>
-      <p>In the next 12 to 18 months, I want to see beaches and a few new places while this window is open. I'm not picky about how that happens. Miles, hotel points, a timeshare week, a place to stay, connections, or dollars — if you have something to offer, I'll gladly take it. Here's where things stand right now, and a few concrete ways in.</p>
+      <p>In the next 12 to 18 months, I want to see beaches and a few new places while this window is open. I'm not picky about how that happens. Miles, hotel points, a timeshare week, a place to stay, connections, or dollars — if you have something to offer, I'll gladly take it. Here are the three that help most, and everything else is one click away.</p>
     </div>
 
     <div class="pq">
@@ -875,40 +901,17 @@ footer a{color:#D8E4E0;}
         <a href="/gift-travel">Read the gifting guide →</a>
       </div>
       <div class="help-card">
-        <span class="help-tag">March 2027</span>
-        <h3>Join my 50th birthday cruise</h3>
-        <p>Family and friends are gathering for a week in the Caribbean to celebrate my 50th birthday together. Reach out for details on joining or helping make it possible for others to come.</p>
-        <a href="mailto:hello@nellyslegacyproject.com">Get in touch →</a>
-      </div>
-      <div class="help-card">
-        <span class="help-tag">For Companies</span>
-        <h3>Sponsor part of the journey</h3>
-        <p>If your company wants to make a financial contribution toward getting me to see these places, I'd genuinely love to talk about what that could look like.</p>
-        <a href="mailto:hello@nellyslegacyproject.com">Start a conversation →</a>
-      </div>
-      <div class="help-card">
-        <span class="help-tag">For Organizations</span>
-        <h3>Partner with us</h3>
-        <p>If you're with a nonprofit focused on patient support, travel for medical journeys, or cancer care, and think there's a way to collaborate, I'd love to hear the idea.</p>
-        <a href="mailto:hello@nellyslegacyproject.com">Start a conversation →</a>
-      </div>
-      <div class="help-card">
         <span class="help-tag">Simple &amp; Free</span>
         <h3>Watch, share, subscribe</h3>
         <p>The easiest way to help Aunt Nell's Friends grow is to watch an episode with a kid in your life, and share it with a friend who might need it too.</p>
         <a href="https://youtube.com/@AuntNellsFriends" target="_blank" rel="noopener">Visit the channel →</a>
       </div>
-      <div class="help-card">
-        <span class="help-tag">For the Kids</span>
-        <h3>Aunt Nell's wish list</h3>
-        <p>A few books and supplies that help me keep making videos for Aunt Nell's Friends.</p>
-        <a href="https://www.amazon.com/hz/wishlist/ls/31ZQSZ58FZOPW?ref_=wl_share" target="_blank" rel="noopener">View the wish list →</a>
-      </div>
-      <div class="help-card">
-        <span class="help-tag">Just Because</span>
-        <h3>Spoil me a little</h3>
-        <p>If you're the type who wants to send something small and thoughtful just for me, this is the list.</p>
-        <a href="https://www.amazon.com/hz/wishlist/ls/GPLGAJMLE0RP?ref_=wl_share" target="_blank" rel="noopener">View the wish list →</a>
+      <div class="help-card help-card-more">
+        <span class="help-tag">Everything Else</span>
+        <h3>A few other things people have asked about</h3>
+        <p>A birthday cruise in March 2027, company sponsorship, nonprofit partnership, and two wish
+           lists &mdash; one for the kids' channel, one that is frankly just for me.</p>
+        <a href="/more-ways-to-help">See the rest &rarr;</a>
       </div>
     </div>
   </div>
