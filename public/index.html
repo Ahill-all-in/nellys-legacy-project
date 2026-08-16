@@ -190,13 +190,38 @@ nav .wrap{
 }
 @media(max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
 /* hero portrait: the subjects sit low in the frame, so focus there */
-.hero-grid .photo-frame img{max-height:600px; width:100%; object-fit:cover; object-position:center 62%;}
+.hero-grid .photo-frame img{
+  max-height:600px; width:100%; object-fit:cover;
+  transition:opacity .4s ease;
+}
+.hero-grid .photo-frame img.fading{opacity:0;}
+.car-ui{display:flex; align-items:center; justify-content:center; gap:10px; margin-top:20px;}
+.car-btn{
+  border:1.5px solid var(--line); background:#fff; color:var(--teal-deep);
+  width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:1rem;
+  line-height:1; display:flex; align-items:center; justify-content:center;
+  transition:background .15s, border-color .15s;
+}
+.car-btn:hover{background:var(--lavender-pale); border-color:var(--teal);}
+.car-btn:focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
+.car-play{font-size:0.58rem; letter-spacing:1px;}
+.car-dots{display:flex; gap:8px; align-items:center;}
+.car-dot{
+  width:9px; height:9px; border-radius:50%; border:none; padding:0; cursor:pointer;
+  background:#C6CEC9; transition:background .2s, transform .2s;
+}
+.car-dot[aria-selected="true"]{background:var(--teal-deep); transform:scale(1.35);}
+.car-dot:focus-visible{outline:3px solid var(--gold); outline-offset:3px;}
+@media(prefers-reduced-motion:reduce){
+  .hero-grid .photo-frame img{transition:none;}
+}
+
 /* mobile: lead with her face, not with a wall of text */
 @media(max-width:760px){
   .hero{padding-top:26px;}
   .hero-grid{display:flex; flex-direction:column; gap:26px;}
   .hero-grid .photo-frame{order:-1; margin:0;}
-  .hero-grid .photo-frame img{max-height:52vh; width:100%; object-fit:cover; object-position:center 62%;}
+  .hero-grid .photo-frame img{max-height:56vh;}
   .hero h1{font-size:clamp(2rem,8.5vw,2.6rem); line-height:1.1;}
   .hero .lede{font-size:1rem; line-height:1.55;}
   .cta-row .btn{flex:1 1 44%; text-align:center;}
@@ -631,9 +656,17 @@ footer a{color:#D8E4E0;}
       </div>
     </div>
     <div class="photo-frame">
-      <img src="images/beach-kids.jpg" alt="Danell in a sunhat and teal hair walking up the beach at sunset with three of her grandchildren">
-      <div class="cap">&mdash; The beach, the kids, and the T&nbsp;Rex walk</div>
+      <img id="hero-img" src="images/beach-kids.jpg" style="object-position:center 62%"
+           alt="Danell in a sunhat and teal hair walking up the beach at sunset with three of her grandchildren">
+      <div class="cap" id="hero-cap">&mdash; The beach, the kids, and the T&nbsp;Rex walk</div>
+
     </div>
+      <div class="car-ui" hidden>
+        <button type="button" class="car-btn car-prev" aria-label="Previous photo">&#8249;</button>
+        <div class="car-dots" role="tablist" aria-label="Choose a photo"></div>
+        <button type="button" class="car-btn car-play" aria-label="Pause the slideshow" aria-pressed="false">&#10073;&#10073;</button>
+        <button type="button" class="car-btn car-next" aria-label="Next photo">&#8250;</button>
+      </div>
   </div>
 </header>
 
@@ -901,7 +934,6 @@ footer a{color:#D8E4E0;}
     </div>
     <div class="anf-card">
       <h3>Recent read-alongs</h3>
-      <p>A growing library of storytime, coloring, and outdoor adventures.</p>
       <!-- TODO: drop a screenshot of the Aunt Nell's Friends channel in here as
            images/auntnells-channel.jpg and restore the <img> below. -->
       <p class="note" style="margin-top:8px;">Storytime, coloring, and outdoor adventures &mdash;
@@ -1262,6 +1294,89 @@ footer a{color:#D8E4E0;}
       else fetch("/api/click", {method:"POST", body: body, keepalive: true, headers:{"content-type":"application/json"}});
     } catch(e){}
   }, true);
+})();
+</script>
+<script>
+(function(){
+  var img = document.getElementById('hero-img');
+  var cap = document.getElementById('hero-cap');
+  var ui  = document.querySelector('.car-ui');
+  if (!img || !cap || !ui) return;
+
+  var shots = [
+    {src:'images/beach-kids.jpg',   pos:'center 62%', cap:'\u2014 The beach, the kids, and the T\u00a0Rex walk',
+     alt:'Danell in a sunhat and teal hair walking up the beach at sunset with three of her grandchildren'},
+    {src:'images/legos.jpg',        pos:'center 34%', cap:'\u2014 Austin and me, and a Lego set that took us a week',
+     alt:'Danell and her husband Austin grinning together, holding a Lego set'},
+    {src:'images/fights-alone.jpg', pos:'center 42%', cap:'\u2014 In this family, no one fights alone',
+     alt:'Danell in a green knit hat holding up a blanket reading In This Family No One Fights Alone'},
+    {src:'images/stem-cells.jpg',   pos:'center 32%', cap:"\u2014 A stranger's cells, about to become my blood",
+     alt:'Danell smiling and holding the bag of donated stem cells before her transplant'}
+  ];
+
+  var i = 0, timer = null, busy = false;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var dots = ui.querySelector('.car-dots');
+  var play = ui.querySelector('.car-play');
+
+  shots.slice(1).forEach(function(s){ var p = new Image(); p.src = s.src; });
+
+  shots.forEach(function(s, n){
+    var d = document.createElement('button');
+    d.type = 'button'; d.className = 'car-dot'; d.setAttribute('role','tab');
+    d.setAttribute('aria-label','Photo ' + (n+1) + ' of ' + shots.length);
+    d.setAttribute('aria-selected', n === 0 ? 'true' : 'false');
+    d.addEventListener('click', function(){ go(n); stop(); });
+    dots.appendChild(d);
+  });
+  var dotEls = [].slice.call(dots.children);
+
+  function paint(n){
+    var s = shots[n];
+    img.src = s.src; img.alt = s.alt; img.style.objectPosition = s.pos;
+    cap.innerHTML = s.cap;
+    dotEls.forEach(function(d, k){ d.setAttribute('aria-selected', k === n ? 'true' : 'false'); });
+  }
+  function go(n){
+    n = (n + shots.length) % shots.length;
+    if (n === i || busy) return;
+    i = n;
+    if (reduce) { paint(i); return; }
+    busy = true;
+    img.classList.add('fading');
+    setTimeout(function(){
+      paint(i);
+      img.classList.remove('fading');
+      busy = false;
+    }, 400);
+  }
+  function start(){
+    if (reduce || timer) return;
+    timer = setInterval(function(){ go(i+1); }, 5500);
+    play.setAttribute('aria-pressed','false');
+    play.setAttribute('aria-label','Pause the slideshow');
+    play.innerHTML = '&#10073;&#10073;';
+  }
+  function stop(){
+    if (timer) { clearInterval(timer); timer = null; }
+    play.setAttribute('aria-pressed','true');
+    play.setAttribute('aria-label','Play the slideshow');
+    play.innerHTML = '&#9654;';
+  }
+
+  ui.querySelector('.car-prev').addEventListener('click', function(){ go(i-1); stop(); });
+  ui.querySelector('.car-next').addEventListener('click', function(){ go(i+1); stop(); });
+  play.addEventListener('click', function(){ timer ? stop() : start(); });
+  ui.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowLeft')  { go(i-1); stop(); }
+    if (e.key === 'ArrowRight') { go(i+1); stop(); }
+  });
+  var frame = img.closest('.photo-frame');
+  frame.addEventListener('mouseenter', function(){ if (timer) { clearInterval(timer); timer = null; } });
+  frame.addEventListener('mouseleave', function(){ if (play.getAttribute('aria-pressed') === 'false') start(); });
+
+  ui.hidden = false;
+  if (reduce) { stop(); } else { start(); }
 })();
 </script>
 </body>
