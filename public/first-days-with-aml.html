@@ -104,6 +104,9 @@ nav .wrap{
   font-size:1.15rem;
   color:var(--teal-deep);
 }
+.brand{text-decoration:none; display:inline-block;}
+.brand:hover{text-decoration:none; opacity:0.75;}
+.brand:focus-visible{outline:3px solid var(--gold); outline-offset:4px; border-radius:4px;}
 .brand span{color:var(--gold-deep);}
 .navlinks{display:flex; gap:22px; list-style:none;}
 .navlinks a{
@@ -503,7 +506,7 @@ footer a{color:#D8E4E0;}
 
 <nav>
   <div class="wrap">
-    <div class="brand">Danell<span>'s</span> Journey</div>
+    <a class="brand" href="/" aria-label="Danell's Journey — home">Danell<span>'s</span> Journey</a>
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
