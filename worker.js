@@ -499,6 +499,35 @@ render();
 </script></body></html>`;
 }
 
+
+function adminGate(message, showForm) {
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Photos &mdash; sign in</title>
+<style>
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#F1EFE7;color:#152530;
+    margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;}
+  .box{background:#fff;border:1px solid #D7DCD5;border-radius:16px;padding:32px 28px;max-width:380px;width:100%;
+    box-shadow:0 14px 34px rgba(21,37,48,.09);}
+  h1{font-size:1.25rem;margin:0 0 6px;color:#153447;}
+  p{margin:0 0 18px;color:#5A6E75;font-size:.94rem;line-height:1.5;}
+  .err{color:#9A3B32;font-weight:600;}
+  input{width:100%;padding:12px 14px;border:1px solid #D7DCD5;border-radius:10px;font-size:1rem;
+    box-sizing:border-box;margin-bottom:12px;}
+  button{width:100%;padding:12px;border:none;border-radius:10px;background:#153447;color:#fff;
+    font-size:1rem;font-weight:600;cursor:pointer;}
+  button:hover{background:#1D4A5F;}
+</style></head><body><div class="box">
+<h1>Danell&rsquo;s photos</h1>
+${message ? `<p class="err">${message}</p>` : `<p>Enter the admin key to add or change the photos on the home page.</p>`}
+${showForm ? `<form method="GET" action="/admin/photos">
+  <input type="password" name="key" placeholder="Admin key" autofocus autocomplete="current-password" required>
+  <button type="submit">Sign in</button>
+</form>` : ""}
+</div></body></html>`;
+}
+
 export default {
   async scheduled(event, env, ctx) {
     ctx.waitUntil((async () => {
@@ -643,7 +672,16 @@ export default {
 
     if (url.pathname === "/admin/photos") {
       const key = url.searchParams.get("key") || "";
-      if (!env.ADMIN_KEY || key !== env.ADMIN_KEY) return new Response("Not authorized.", { status: 401 });
+      if (!env.ADMIN_KEY) {
+        return new Response(adminGate("No admin key is set on this site yet. Run: wrangler secret put ADMIN_KEY", false),
+          { status: 500, headers: { "content-type": "text/html;charset=UTF-8" } });
+      }
+      if (key !== env.ADMIN_KEY) {
+        // No key at all = first visit, show the form quietly. Wrong key = say so.
+        const msg = key ? "That key didn't match. Try again." : "";
+        return new Response(adminGate(msg, true),
+          { status: key ? 401 : 200, headers: { "content-type": "text/html;charset=UTF-8" } });
+      }
       const raw = await env.STORIES.get(PHOTOS_KEY);
       let slides = [];
       try { slides = raw ? (JSON.parse(raw).slides || []) : []; } catch (e) { slides = []; }
