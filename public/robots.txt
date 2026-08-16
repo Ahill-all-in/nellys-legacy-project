@@ -1,6 +1,4 @@
 User-agent: *
-Disallow: /preview
-Disallow: /preview.html
 Allow: /
 
 Sitemap: https://nellyslegacyproject.com/sitemap.xml

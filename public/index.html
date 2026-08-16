@@ -189,6 +189,16 @@ nav .wrap{
   display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;
 }
 @media(max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
+/* mobile: lead with her face, not with a wall of text */
+@media(max-width:760px){
+  .hero{padding-top:26px;}
+  .hero-grid{display:flex; flex-direction:column; gap:26px;}
+  .hero-grid .photo-frame{order:-1; margin:0;}
+  .hero-grid .photo-frame img{max-height:46vh; width:100%; object-fit:cover; object-position:center 22%;}
+  .hero h1{font-size:clamp(2rem,8.5vw,2.6rem); line-height:1.1;}
+  .hero .lede{font-size:1rem; line-height:1.55;}
+  .cta-row .btn{flex:1 1 44%; text-align:center;}
+}
 
 .eyebrow{
   font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase;
@@ -520,6 +530,45 @@ footer a{color:#D8E4E0;}
   font-size:0.78rem; color:#7A8590; line-height:1.6; margin-top:24px;
   padding-top:20px; border-top:1px solid rgba(255,255,255,0.08); max-width:70ch;
 }
+
+.ask-stats{max-width:760px; margin:30px 0 4px;}
+.ask-bar{height:10px; border-radius:99px; background:#E3E7E0; overflow:hidden; margin-bottom:20px;}
+.ask-bar span{display:block; height:100%; border-radius:99px;
+  background:linear-gradient(90deg, var(--teal) 0%, var(--gold) 100%);}
+.ask-figs{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+.ask-figs div{display:flex; flex-direction:column;}
+.ask-figs strong{font-family:'Fraunces',serif; font-size:1.85rem; color:var(--teal-deep); line-height:1.1;}
+.ask-figs span{font-size:0.92rem; color:#5A6E75; margin-top:5px; line-height:1.4;}
+.ask-asof{font-size:0.87rem; color:#6A7B80; margin-top:20px; line-height:1.55;}
+@media(max-width:620px){
+  .ask-figs{grid-template-columns:1fr; gap:14px;}
+  .ask-figs div{flex-direction:row; align-items:baseline; gap:10px;}
+  .ask-figs strong{font-size:1.45rem;}
+  .ask-figs span{margin-top:0;}
+}
+
+.dreams{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin:34px 0 10px;}
+@media(max-width:860px){ .dreams{grid-template-columns:1fr;} }
+.dream{
+  background:#fff; border:1.5px solid var(--line); border-radius:16px; padding:28px 26px;
+  box-shadow:0 10px 26px rgba(21,37,48,0.07); display:flex; flex-direction:column;
+}
+.dream-1{background:var(--teal-deep); border-color:var(--teal-deep); color:#fff;
+  box-shadow:0 16px 38px rgba(21,52,71,0.28);}
+.dream-tag{font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase;
+  font-weight:700; color:var(--gold-deep); display:block; margin-bottom:10px;}
+.dream-1 .dream-tag{color:var(--gold);}
+.dream h3{font-family:'Fraunces',serif; font-size:1.3rem; color:var(--teal-deep);
+  margin:0 0 4px; line-height:1.2;}
+.dream-1 h3{color:#fff;}
+.dream-who{font-size:0.9rem; color:#6A7B80; margin:0 0 12px;}
+.dream-1 .dream-who{color:#A9C9D2;}
+.dream p{font-size:0.97rem; line-height:1.62; color:#43585F; margin:0 0 16px; flex:1;}
+.dream-1 p{color:#D3E7EC;}
+.dream-cost{font-family:'Fraunces',serif; font-size:1.5rem; font-weight:600;
+  color:var(--teal-deep);}
+.dream-1 .dream-cost{color:#EBCF95;}
+.dreams-note{font-size:0.9rem; color:#6A7B80; line-height:1.6; margin:22px 0 0; max-width:760px;}
 </style>
 </head>
 <body>
@@ -567,11 +616,16 @@ footer a{color:#D8E4E0;}
   <div class="wrap hero-grid">
     <div>
       <span class="eyebrow">Time, Borrowed and Well Spent</span>
-      <h1>I'm not cured.<br>I've been given <em>time</em>.</h1>
-      <p class="lede">In January 2025, I was days from a coma. I'm in remission now — but my leukemia carries higher-risk mutations, and most relapses after transplant happen within the first two years. I'm not waiting to find out. I'm living now, on purpose, while reading storybooks to kids along the way.</p>
+      <h1>The grandkids call me <em>NoNo</em>.</h1>
+      <p class="lede">On the beach I do the T&nbsp;Rex walk &mdash; little arms, big stomping, the whole
+         production &mdash; until somebody falls over laughing. There's ice cream on the first day of
+         school and the last day of school, every year, no exceptions. I read picture books out loud to
+         anybody's kids who'll sit still for one.</p>
+      <p class="lede">I also have leukemia, and I'm not cured. I've got time, and nobody will tell me
+         how much of it. So I'm spending it.</p>
       <div class="cta-row">
         <a href="#story" class="btn btn-primary">Read my story</a>
-        <a href="#help" class="btn btn-ghost">Ways to help</a>
+        <a href="#start-here" class="btn btn-ghost">Just diagnosed? Start here</a>
       </div>
     </div>
     <div class="photo-frame">
@@ -710,7 +764,11 @@ footer a{color:#D8E4E0;}
       <div class="t-card">
         <span class="t-num">01</span>
         <h4>January 2025</h4>
-        <p>After weeks of unexplained illness, my hemoglobin was found to be 2.4 — one of the lowest levels ever recorded at UK Hospital. I was diagnosed with acute myeloid leukemia (AML).</p>
+        <p>After weeks of unexplained illness, my hemoglobin came back at 2.4. Normal for a woman is
+           around 12. Nurses who had worked that floor for years told me they had never seen anyone
+           walk in at that number &mdash; and I had walked in.</p>
+        <p>It was also my grandson Jaxon's birthday. I called him from the room and sang to him anyway,
+           because you don't skip that.</p>
         <p class="note" style="margin-top:10px;">(2.4 is the number that hit the family group chat that day. My actual chart says 2.7. Either way, not a number you want next to your name.)</p>
         <div class="pq-card">
           <p>&ldquo;She got diagnosed on Jaxon&rsquo;s birthday, but she didn&rsquo;t miss calling him to sing to him.&rdquo;</p>
@@ -746,9 +804,17 @@ footer a{color:#D8E4E0;}
       </figure>
     </div>
     <div class="story-body">
-      <p><strong>Remission is not the same as being cured.</strong> My leukemia carries higher-risk mutations, and with AML, most relapses after transplant happen within the first two years. That's the honest math my family and I live with: this isn't a victory lap, it's real, uncertain time — and we've chosen not to wait around and hope for more of it.</p>
-      <p>Even on hard pain days, I show up publicly and honestly — documenting my treatment on TikTok, and in doing so, connecting with a community of fellow transplant patients. Many are just beginning the road I've already walked. I tell them what's coming. What helped me. What I wish someone had told me.</p>
-      <p>So my family and I are front-loading everything we can, now. If the remission lasts longer than expected, no one will regret having lived fully in the meantime — and we'll be the first to stop asking for help. But most of what we do together right now is likely the only time, or the last time, I get to live it. That's why the timing on the things below actually matters.</p>
+      <p><strong>Remission is not the same as being cured.</strong> My leukemia carries higher-risk
+         mutations, and with AML, most relapses after transplant happen within the first two years.
+         In January 2025 I was days from a coma. I know exactly how fast this can move.</p>
+      <p>So this isn't a victory lap. It's real, uncertain time, and we've decided not to sit around
+         waiting to find out how much of it there is.</p>
+      <p>I post the bad days too. There's a photo of me on the transplant unit in a frog hat, and one
+         of me pulling a face in an oxygen mask. I've really been through it, and I'm still laughing
+         &mdash; that's the part I want other patients to see.</p>
+      <p>Most of the people who find me on TikTok are just starting the road I've already walked. So I
+         tell them what's coming, what helped me, and what I wish someone had told me.</p>
+      <p>So we're doing it all now. Everything we can, while I can. If the remission lasts longer than expected, no one will regret having lived fully in the meantime — and we'll be the first to stop asking for help. But most of what we do together right now is likely the only time, or the last time, I get to live it. That's why the timing on the things below actually matters.</p>
     </div>
   </div>
 </section>
@@ -825,7 +891,7 @@ footer a{color:#D8E4E0;}
       <span class="eyebrow">My Legacy Project</span>
       <h2 style="margin-bottom:16px;">Aunt Nell's Friends</h2>
       <p style="color:#43585F; font-size:1.05rem; margin-bottom:20px;">Join me as I discover our world through play and stories. I am a mom, a grandma, and an aunt to many more. They may not all be my DNA, but they are all family in my heart.</p>
-      <p style="color:#43585F; font-size:1.05rem; margin-bottom:20px;">I've always believed in what a young imagination can do, and I've always had a special way of connecting with kids — slowing down, getting on their level, letting them lead. Some of my favorite moments in this whole life have been reading bedtime stories to our own grandkids, watching their faces while a book comes alive in front of them.</p>
+      <p style="color:#43585F; font-size:1.05rem; margin-bottom:20px;">There are Happy Meals and Pokémon cards. There's a Taylor Swift song on in the car. There are Legos all over the floor and I am usually the one on the floor with them. Some of my favourite moments in this whole life have been reading bedtime stories to our grandkids and watching their faces while the book comes alive in front of them.</p>
       <p style="color:#43585F; font-size:1.05rem;">On my YouTube channel, I read picture books, color, and play outdoors with kids — building something joyful and educational. This is my legacy project: I want to keep giving to kids, keep showing up for their imaginations, long after I've lost this fight. If I can't be here in person someday, I want to still be here in this way.</p>
       <div style="margin-top:26px;">
         <a href="https://youtube.com/@AuntNellsFriends" class="btn btn-primary" target="_blank" rel="noopener">Watch on YouTube</a>
@@ -852,7 +918,44 @@ footer a{color:#D8E4E0;}
     <div class="section-head">
       <span class="eyebrow">The Ask</span>
       <h2>What I'm hoping for</h2>
-      <p>In the next 12 to 18 months, I want to see beaches and a few new places while this window is open. I'm not picky about how that happens. Miles, hotel points, a timeshare week, a place to stay, connections, or dollars — if you have something to offer, I'll gladly take it. Here's where things stand right now, and a few concrete ways in.</p>
+      <p>For a while I said &ldquo;beaches and a few new places,&rdquo; which was true but vague. Here is the actual list, because I&rsquo;d rather be specific than polite. Three parks, one window. Below that are the three ways to help that make the most difference, and everything else is one click away.</p>
+
+    <div class="dreams">
+      <div class="dream dream-1">
+        <span class="dream-tag">The one I want most</span>
+        <h3>Walt Disney World</h3>
+        <p class="dream-who">Eight to ten of us &middot; 7 nights</p>
+        <p>All of us in one place at one time &mdash; kids, bonus kids, grandkids. Not because it&rsquo;s
+           Disney. Because it&rsquo;s everybody, together, while I&rsquo;m well enough to keep up with
+           them.</p>
+        <span class="dream-cost">~$21,000</span>
+      </div>
+      <div class="dream">
+        <span class="dream-tag">Going back properly</span>
+        <h3>Disneyland Paris &amp; Paris</h3>
+        <p class="dream-who">Austin and me &middot; 7 nights</p>
+        <p>Austin was there for work a few years ago and I flew out for the last few days. We got one
+           afternoon in the park. I want to go back and do it properly &mdash; a few days there for
+           World of Frozen, which opened this year, and a few days in Paris itself. A week, not an
+           afternoon.</p>
+        <span class="dream-cost">~$8,000</span>
+      </div>
+      <div class="dream">
+        <span class="dream-tag">The ridiculous one</span>
+        <h3>Tokyo Disneyland</h3>
+        <p class="dream-who">Austin and me &middot; 8 nights</p>
+        <p>I&rsquo;ve wanted to see it since I was a kid. Eighteen months ago I&rsquo;d have told you it
+           was a silly thing to want. I&rsquo;ve since revised my position on silly things.</p>
+        <span class="dream-cost">~$10,500</span>
+      </div>
+    </div>
+
+    <p class="dreams-note">Those are researched numbers, not round ones. A good chunk of the difference
+       between the cheap version and the one above is medical rather than fancy &mdash; a seat I can
+       actually sit in for fourteen hours, a room at the gates so I can sleep at 2pm and come back out
+       for the fireworks, and the paid line-skip passes, because Disney World&rsquo;s disability program
+       doesn&rsquo;t cover someone like me. The difference between &ldquo;she went&rdquo; and &ldquo;she
+       enjoyed it&rdquo; is about five thousand dollars, and it&rsquo;s the five thousand that matters.</p>
     </div>
 
     <div class="pq">
@@ -874,40 +977,17 @@ footer a{color:#D8E4E0;}
         <a href="/gift-travel">Read the gifting guide →</a>
       </div>
       <div class="help-card">
-        <span class="help-tag">March 2027</span>
-        <h3>Join my 50th birthday cruise</h3>
-        <p>Family and friends are gathering for a week in the Caribbean to celebrate my 50th birthday together. Reach out for details on joining or helping make it possible for others to come.</p>
-        <a href="mailto:hello@nellyslegacyproject.com">Get in touch →</a>
-      </div>
-      <div class="help-card">
-        <span class="help-tag">For Companies</span>
-        <h3>Sponsor part of the journey</h3>
-        <p>If your company wants to make a financial contribution toward getting me to see these places, I'd genuinely love to talk about what that could look like.</p>
-        <a href="mailto:hello@nellyslegacyproject.com">Start a conversation →</a>
-      </div>
-      <div class="help-card">
-        <span class="help-tag">For Organizations</span>
-        <h3>Partner with us</h3>
-        <p>If you're with a nonprofit focused on patient support, travel for medical journeys, or cancer care, and think there's a way to collaborate, I'd love to hear the idea.</p>
-        <a href="mailto:hello@nellyslegacyproject.com">Start a conversation →</a>
-      </div>
-      <div class="help-card">
         <span class="help-tag">Simple &amp; Free</span>
         <h3>Watch, share, subscribe</h3>
         <p>The easiest way to help Aunt Nell's Friends grow is to watch an episode with a kid in your life, and share it with a friend who might need it too.</p>
         <a href="https://youtube.com/@AuntNellsFriends" target="_blank" rel="noopener">Visit the channel →</a>
       </div>
-      <div class="help-card">
-        <span class="help-tag">For the Kids</span>
-        <h3>Aunt Nell's wish list</h3>
-        <p>A few books and supplies that help me keep making videos for Aunt Nell's Friends.</p>
-        <a href="https://www.amazon.com/hz/wishlist/ls/31ZQSZ58FZOPW?ref_=wl_share" target="_blank" rel="noopener">View the wish list →</a>
-      </div>
-      <div class="help-card">
-        <span class="help-tag">Just Because</span>
-        <h3>Spoil me a little</h3>
-        <p>If you're the type who wants to send something small and thoughtful just for me, this is the list.</p>
-        <a href="https://www.amazon.com/hz/wishlist/ls/GPLGAJMLE0RP?ref_=wl_share" target="_blank" rel="noopener">View the wish list →</a>
+      <div class="help-card help-card-more">
+        <span class="help-tag">Everything Else</span>
+        <h3>A few other things people have asked about</h3>
+        <p>A birthday cruise in March 2027, company sponsorship, nonprofit partnership, and two wish
+           lists &mdash; one for the kids' channel, one that is frankly just for me.</p>
+        <a href="/more-ways-to-help">See the rest &rarr;</a>
       </div>
     </div>
   </div>
