@@ -31,6 +31,7 @@ const TRACK_PATHS = new Set(["/", "/index.html", "/newly-diagnosed-aml",
   "/newly-diagnosed-aml.html", "/aml-caregiver-guide", "/aml-caregiver-guide.html",
   "/gift-travel", "/gift-travel.html",
   "/more-ways-to-help", "/more-ways-to-help.html",
+  "/first-days-with-aml", "/first-days-with-aml.html",
   "/llms.txt", "/sitemap.xml"]);
 
 function dayKey(d = new Date()) {
