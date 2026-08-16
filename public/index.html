@@ -1319,7 +1319,28 @@ footer a{color:#D8E4E0;}
   var dots = ui.querySelector('.car-dots');
   var play = ui.querySelector('.car-play');
 
-  shots.slice(1).forEach(function(s){ var p = new Image(); p.src = s.src; });
+  function preload(list){ list.slice(1).forEach(function(s){ var p = new Image(); p.src = s.src; }); }
+  preload(shots);
+
+  // If photos have been uploaded through /admin/photos, prefer those. If the
+  // request fails or returns nothing, the built-in set above stays in place.
+  fetch('/api/photos').then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
+    if (!d || !d.slides || !d.slides.length) return;
+    shots = d.slides;
+    i = 0;
+    dotEls.forEach(function(d){ d.remove(); });
+    dotEls.length = 0;
+    shots.forEach(function(s, n){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'car-dot'; b.setAttribute('role','tab');
+      b.setAttribute('aria-label','Photo ' + (n+1) + ' of ' + shots.length);
+      b.setAttribute('aria-selected', n === 0 ? 'true' : 'false');
+      b.addEventListener('click', function(){ go(n); stop(); });
+      dots.appendChild(b); dotEls.push(b);
+    });
+    paint(0);
+    preload(shots);
+  }).catch(function(){ /* keep the built-in photos */ });
 
   shots.forEach(function(s, n){
     var d = document.createElement('button');

@@ -388,6 +388,117 @@ async function buildDigest(env, dayOverride) {
   return msg;
 }
 
+
+function photosAdminPage(key, slides, hash, configured) {
+  const data = JSON.stringify({ key, slides, hash }).replace(/</g, "\\u003c");
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Photos &mdash; Danell's Journey</title>
+<style>
+  :root{--ink:#152530;--paper:#F1EFE7;--teal:#2F6B7A;--teal-deep:#153447;--gold:#C9A66B;--line:#D7DCD5;}
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--paper);
+    color:var(--ink);margin:0;padding:24px 16px 80px;line-height:1.55;}
+  .wrap{max-width:760px;margin:0 auto;}
+  h1{font-size:1.5rem;margin:0 0 4px;color:var(--teal-deep);}
+  p.sub{margin:0 0 24px;color:#5A6E75;font-size:.95rem;}
+  .warn{background:#FBF0EE;border:2px solid #C97F73;border-radius:12px;padding:16px 18px;margin-bottom:22px;}
+  .warn code{background:#fff;padding:2px 6px;border-radius:4px;font-size:.85rem;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:14px;
+    display:flex;gap:14px;align-items:flex-start;}
+  .card img{width:110px;height:138px;object-fit:cover;border-radius:8px;background:#eee;flex:0 0 auto;}
+  .fields{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;}
+  label{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:#6A7B80;font-weight:700;}
+  input[type=text]{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:.95rem;}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+  button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 12px;cursor:pointer;font-size:.88rem;}
+  button:hover{background:#F3F6F3;}
+  button.primary{background:var(--teal-deep);color:#fff;border-color:var(--teal-deep);font-weight:600;}
+  button.danger{color:#9A3B32;}
+  #drop{border:2px dashed var(--line);border-radius:14px;padding:28px;text-align:center;color:#5A6E75;
+    background:#fff;margin-bottom:18px;}
+  #drop.over{border-color:var(--teal);background:#F0F5F3;}
+  #status{position:fixed;left:0;right:0;bottom:0;background:var(--teal-deep);color:#fff;padding:12px 16px;
+    text-align:center;font-size:.92rem;transform:translateY(100%);transition:transform .2s;}
+  #status.show{transform:none;}
+  .hint{font-size:.82rem;color:#6A7B80;margin-top:-4px;}
+</style></head><body><div class="wrap">
+<h1>Photos</h1>
+<p class="sub">These are the photos in the slideshow at the top of the home page. Add one straight from your phone &mdash; iPhone photos are fine, they get converted automatically.</p>
+${configured ? "" : `<div class="warn"><strong>Not connected yet.</strong><br>
+  Cloudflare Images needs three secrets before uploads will work:
+  <code>CF_ACCOUNT_ID</code>, <code>CF_IMAGES_TOKEN</code>, <code>CF_IMAGES_HASH</code>.
+  You can still reorder and edit captions below.</div>`}
+<div id="drop">
+  <p style="margin:0 0 10px"><strong>Add a photo</strong></p>
+  <input type="file" id="file" accept="image/*" multiple>
+  <p class="hint" style="margin:10px 0 0">Drag and drop works too. Max 10&nbsp;MB each.</p>
+</div>
+<div id="list"></div>
+<div class="row" style="margin-top:18px">
+  <button class="primary" id="save">Save changes</button>
+  <a href="/" target="_blank" style="font-size:.88rem;color:var(--teal);">View the site &rarr;</a>
+</div>
+</div>
+<div id="status"></div>
+<script>
+var S = ${data};
+var list = document.getElementById('list');
+function say(m, ms){ var s=document.getElementById('status'); s.textContent=m; s.classList.add('show');
+  clearTimeout(say.t); say.t=setTimeout(function(){s.classList.remove('show');}, ms||2600); }
+function url(id){ return S.hash ? 'https://imagedelivery.net/'+S.hash+'/'+id+'/public' : ''; }
+function render(){
+  list.innerHTML='';
+  if(!S.slides.length){ list.innerHTML='<p style="color:#6A7B80">No photos yet &mdash; the site is showing its built-in ones.</p>'; return; }
+  S.slides.forEach(function(s, i){
+    var d=document.createElement('div'); d.className='card';
+    d.innerHTML='<img src="'+url(s.id)+'" alt="">'+
+      '<div class="fields">'+
+      '<div><label>Caption</label><input type="text" data-f="cap" value="'+(s.cap||'').replace(/"/g,'&quot;')+'"></div>'+
+      '<div><label>Description for screen readers</label><input type="text" data-f="alt" value="'+(s.alt||'').replace(/"/g,'&quot;')+'"></div>'+
+      '<div><label>Vertical focus (0% top &ndash; 100% bottom)</label><input type="text" data-f="pos" value="'+(s.pos||'center 50%')+'"></div>'+
+      '<div class="row"><button data-a="up">&uarr; Up</button><button data-a="down">&darr; Down</button>'+
+      '<button class="danger" data-a="del">Remove</button></div></div>';
+    d.querySelectorAll('input').forEach(function(inp){
+      inp.addEventListener('input', function(){ S.slides[i][inp.dataset.f]=inp.value; });
+    });
+    d.querySelector('[data-a=up]').onclick=function(){ if(i>0){ var t=S.slides[i-1]; S.slides[i-1]=S.slides[i]; S.slides[i]=t; render(); } };
+    d.querySelector('[data-a=down]').onclick=function(){ if(i<S.slides.length-1){ var t=S.slides[i+1]; S.slides[i+1]=S.slides[i]; S.slides[i]=t; render(); } };
+    d.querySelector('[data-a=del]').onclick=function(){ if(confirm('Remove this photo from the slideshow?')){ S.slides.splice(i,1); render(); } };
+    list.appendChild(d);
+  });
+}
+async function upload(file){
+  if(file.size > 10*1024*1024){ say(file.name+' is over 10 MB'); return; }
+  say('Uploading '+file.name+'…', 60000);
+  var r = await fetch('/api/photos/upload-url?key='+encodeURIComponent(S.key), {method:'POST'});
+  var j = await r.json();
+  if(!j.uploadURL){ say(j.error || 'Could not get an upload link'); return; }
+  var fd = new FormData(); fd.append('file', file);
+  var up = await fetch(j.uploadURL, {method:'POST', body:fd});
+  if(!up.ok){ say('Upload failed'); return; }
+  S.slides.push({id:j.id, cap:'', alt:'', pos:'center 50%'});
+  render(); say('Added. Remember to Save.');
+}
+document.getElementById('file').addEventListener('change', function(e){
+  [].slice.call(e.target.files).forEach(upload); e.target.value='';
+});
+var drop=document.getElementById('drop');
+['dragenter','dragover'].forEach(function(ev){ drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.add('over');}); });
+['dragleave','drop'].forEach(function(ev){ drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.remove('over');}); });
+drop.addEventListener('drop', function(e){ [].slice.call(e.dataTransfer.files).forEach(upload); });
+document.getElementById('save').onclick=async function(){
+  say('Saving…', 30000);
+  var r = await fetch('/api/photos/save?key='+encodeURIComponent(S.key),
+    {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({slides:S.slides})});
+  var j = await r.json();
+  say(j.ok ? ('Saved '+j.count+' photo'+(j.count===1?'':'s')+'. Refresh the site to see it.') : (j.error||'Save failed'));
+};
+render();
+</script></body></html>`;
+}
+
 export default {
   async scheduled(event, env, ctx) {
     ctx.waitUntil((async () => {
@@ -472,6 +583,76 @@ export default {
     }
 
     // --- Public: approved quotes ---
+    // ---------- PHOTOS: Cloudflare Images ----------
+    // Everything here degrades to nothing if the secrets or KV config are absent,
+    // so the public site keeps serving its built-in photos.
+    const PHOTOS_KEY = "photos:hero";
+
+    if (url.pathname === "/api/photos" && request.method === "GET") {
+      const raw = await env.STORIES.get(PHOTOS_KEY);
+      if (!raw) return json({ slides: [] });
+      let cfg;
+      try { cfg = JSON.parse(raw); } catch (e) { return json({ slides: [] }); }
+      const hash = env.CF_IMAGES_HASH;
+      if (!hash || !Array.isArray(cfg.slides)) return json({ slides: [] });
+      return json({
+        slides: cfg.slides.map(s => ({
+          src: `https://imagedelivery.net/${hash}/${s.id}/public`,
+          alt: s.alt || "",
+          cap: s.cap || "",
+          pos: s.pos || "center 50%"
+        }))
+      });
+    }
+
+    // one-time upload URL so the file never streams through the Worker
+    if (url.pathname === "/api/photos/upload-url" && request.method === "POST") {
+      const key = url.searchParams.get("key");
+      if (!env.ADMIN_KEY || key !== env.ADMIN_KEY) return json({ error: "unauthorized" }, 401);
+      if (!env.CF_ACCOUNT_ID || !env.CF_IMAGES_TOKEN) {
+        return json({ error: "Cloudflare Images is not configured yet. Missing CF_ACCOUNT_ID or CF_IMAGES_TOKEN." }, 500);
+      }
+      const form = new FormData();
+      form.append("requireSignedURLs", "false");
+      const r = await fetch(
+        `https://api.cloudflare.com/client/v4/accounts/${env.CF_ACCOUNT_ID}/images/v2/direct_upload`,
+        { method: "POST", headers: { Authorization: `Bearer ${env.CF_IMAGES_TOKEN}` }, body: form });
+      const data = await r.json();
+      if (!data.success) return json({ error: "Cloudflare rejected the request", detail: data.errors }, 502);
+      return json({ id: data.result.id, uploadURL: data.result.uploadURL });
+    }
+
+    if (url.pathname === "/api/photos/save" && request.method === "POST") {
+      const key = url.searchParams.get("key");
+      if (!env.ADMIN_KEY || key !== env.ADMIN_KEY) return json({ error: "unauthorized" }, 401);
+      let body;
+      try { body = await request.json(); } catch (e) { return json({ error: "bad json" }, 400); }
+      if (!body || !Array.isArray(body.slides)) return json({ error: "slides must be an array" }, 400);
+      if (body.slides.length > 12) return json({ error: "twelve photos is plenty" }, 400);
+      const clean = body.slides
+        .filter(s => s && typeof s.id === "string" && s.id.length && s.id.length < 200)
+        .map(s => ({
+          id: s.id,
+          alt: String(s.alt || "").slice(0, 300),
+          cap: String(s.cap || "").slice(0, 200),
+          pos: /^center \d{1,3}%$/.test(s.pos || "") ? s.pos : "center 50%"
+        }));
+      await env.STORIES.put(PHOTOS_KEY, JSON.stringify({ slides: clean, updated: Date.now() }));
+      return json({ ok: true, count: clean.length });
+    }
+
+    if (url.pathname === "/admin/photos") {
+      const key = url.searchParams.get("key") || "";
+      if (!env.ADMIN_KEY || key !== env.ADMIN_KEY) return new Response("Not authorized.", { status: 401 });
+      const raw = await env.STORIES.get(PHOTOS_KEY);
+      let slides = [];
+      try { slides = raw ? (JSON.parse(raw).slides || []) : []; } catch (e) { slides = []; }
+      const hash = env.CF_IMAGES_HASH || "";
+      const configured = !!(env.CF_ACCOUNT_ID && env.CF_IMAGES_TOKEN && hash);
+      return new Response(photosAdminPage(key, slides, hash, configured),
+        { headers: { "content-type": "text/html;charset=UTF-8" } });
+    }
+
     if (url.pathname === "/api/quotes" && request.method === "GET") {
       return json({ quotes: (await listQuotes(env, "approved")).map(q => ({ text: q.text, from: q.from })) });
     }
