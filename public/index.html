@@ -189,12 +189,14 @@ nav .wrap{
   display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;
 }
 @media(max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
+/* hero portrait: the subjects sit low in the frame, so focus there */
+.hero-grid .photo-frame img{max-height:600px; width:100%; object-fit:cover; object-position:center 62%;}
 /* mobile: lead with her face, not with a wall of text */
 @media(max-width:760px){
   .hero{padding-top:26px;}
   .hero-grid{display:flex; flex-direction:column; gap:26px;}
   .hero-grid .photo-frame{order:-1; margin:0;}
-  .hero-grid .photo-frame img{max-height:46vh; width:100%; object-fit:cover; object-position:center 22%;}
+  .hero-grid .photo-frame img{max-height:52vh; width:100%; object-fit:cover; object-position:center 62%;}
   .hero h1{font-size:clamp(2rem,8.5vw,2.6rem); line-height:1.1;}
   .hero .lede{font-size:1rem; line-height:1.55;}
   .cta-row .btn{flex:1 1 44%; text-align:center;}
@@ -629,8 +631,8 @@ footer a{color:#D8E4E0;}
       </div>
     </div>
     <div class="photo-frame">
-      <img src="images/stem-cells.jpg" alt="Danell smiling brightly, holding her own stem cell bag before her transplant">
-      <div class="cap">— During treatment, before my transplant</div>
+      <img src="images/beach-kids.jpg" alt="Danell in a sunhat and teal hair walking up the beach at sunset with three of her grandchildren">
+      <div class="cap">&mdash; The beach, the kids, and the T&nbsp;Rex walk</div>
     </div>
   </div>
 </header>
@@ -900,8 +902,11 @@ footer a{color:#D8E4E0;}
     <div class="anf-card">
       <h3>Recent read-alongs</h3>
       <p>A growing library of storytime, coloring, and outdoor adventures.</p>
-      <img src="images/beach-kids.jpg" alt="Danell in a sunhat walking on the beach with three kids she loves">
-      <p class="note" style="margin-top:16px;">More moments from the channel, coming soon.</p>
+      <!-- TODO: drop a screenshot of the Aunt Nell's Friends channel in here as
+           images/auntnells-channel.jpg and restore the <img> below. -->
+      <p class="note" style="margin-top:8px;">Storytime, coloring, and outdoor adventures &mdash;
+         new episodes going up as I make them.</p>
+      <p style="margin-top:14px;"><a href="https://youtube.com/@AuntNellsFriends" target="_blank" rel="noopener">See every episode on YouTube &rarr;</a></p>
     </div>
   </div>
 </section>
